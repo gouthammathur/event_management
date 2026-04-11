@@ -1,0 +1,1455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Events – Rajiv Gandhi University of Knowledge and Technology</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0d1b2a;
+      --cream: #f7f3ee;
+      --gold: #c9a84c;
+      --gold-light: #e8cc80;
+      --slate: #3d4f61;
+      --muted: #8a9aaa;
+      --white: #ffffff;
+      --radius: 10px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background-color: var(--cream);
+      color: var(--navy);
+    }
+
+    /* ─── NAV ─────────────────────────────── */
+    nav {
+      background: var(--navy);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      height: 68px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.18);
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      color: var(--gold);
+      font-size: 1.35rem;
+      letter-spacing: 0.5px;
+    }
+    .nav-links { display: flex; gap: 32px; }
+    .nav-links a {
+      color: rgba(255,255,255,0.75);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 400;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+
+    /* ─── HERO BANNER ─────────────────────── */
+    .hero {
+      background: var(--navy);
+      padding: 72px 48px 60px;
+      text-align: center;
+      border-bottom: 3px solid var(--gold);
+    }
+    .hero-eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+    .hero p {
+      color: rgba(255,255,255,0.6);
+      font-size: 1rem;
+      max-width: 520px;
+      margin: 0 auto;
+      font-weight: 300;
+    }
+
+    /* ─── SECTION WRAPPER ─────────────────── */
+    .section { padding: 64px 48px; max-width: 1200px; margin: 0 auto; }
+    .section-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 36px;
+      border-bottom: 1.5px solid rgba(13,27,42,0.12);
+      padding-bottom: 16px;
+    }
+    .section-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      color: var(--navy);
+    }
+    .section-header .count-badge {
+      background: var(--gold);
+      color: var(--navy);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
+
+    /* ─── UPCOMING EVENTS ─────────────────── */
+    #upcoming { background: #fff; border-bottom: 1px solid rgba(0,0,0,0.07); }
+    #upcoming .section { padding-top: 56px; padding-bottom: 56px; }
+
+    .upcoming-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      gap: 24px;
+    }
+
+    .upcoming-card {
+      background: var(--cream);
+      border: 1.5px solid rgba(201,168,76,0.3);
+      border-radius: var(--radius);
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: box-shadow 0.25s, transform 0.25s;
+    }
+    .upcoming-card:hover {
+      box-shadow: 0 8px 28px rgba(13,27,42,0.1);
+      transform: translateY(-3px);
+    }
+    .upcoming-card .date-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--navy);
+      color: var(--gold);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 5px 13px;
+      border-radius: 4px;
+      width: fit-content;
+    }
+    .upcoming-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      color: var(--navy);
+      line-height: 1.3;
+    }
+    .upcoming-card p {
+      font-size: 0.88rem;
+      color: var(--slate);
+      line-height: 1.6;
+      font-weight: 300;
+    }
+    .upcoming-card .meta {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+    .upcoming-card .meta span {
+      font-size: 0.8rem;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .upcoming-card .meta svg { width: 13px; height: 13px; }
+    .register-btn {
+      margin-top: 6px;
+      background: var(--gold);
+      color: var(--navy);
+      border: none;
+      padding: 9px 20px;
+      border-radius: 5px;
+      font-size: 0.83rem;
+      font-weight: 600;
+      cursor: pointer;
+      letter-spacing: 0.3px;
+      transition: background 0.2s;
+      align-self: flex-start;
+    }
+    .register-btn:hover { background: var(--gold-light); }
+
+    /* ─── PAST EVENTS SECTION ─────────────── */
+    #past-events { padding-top: 0; }
+
+    .events-list { display: flex; flex-direction: column; gap: 56px; }
+
+    .event-block {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: start;
+      padding-bottom: 56px;
+      border-bottom: 1px solid rgba(0,0,0,0.09);
+    }
+    .event-block:last-child { border-bottom: none; padding-bottom: 0; }
+    .event-block.reverse { direction: rtl; }
+    .event-block.reverse > * { direction: ltr; }
+
+    .event-gallery-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 200px 200px;
+      gap: 8px;
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .event-gallery-grid .thumb {
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+    }
+    .event-gallery-grid .thumb:first-child {
+      grid-row: span 2;
+    }
+    .event-gallery-grid .thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+    .event-gallery-grid .thumb:hover img { transform: scale(1.06); }
+    .thumb-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(13,27,42,0.55);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .thumb:hover .thumb-overlay { opacity: 1; }
+    .thumb-overlay span {
+      color: white;
+      font-size: 0.78rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .event-info { display: flex; flex-direction: column; gap: 14px; }
+    .event-tag {
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+    }
+    .event-info h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.7rem;
+      line-height: 1.25;
+      color: var(--navy);
+    }
+    .event-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      padding: 14px 0;
+      border-top: 1px solid rgba(0,0,0,0.08);
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+    }
+    .event-meta-row .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 0.84rem;
+      color: var(--slate);
+    }
+    .event-meta-row .meta-item svg { color: var(--gold); flex-shrink: 0; }
+    .event-desc {
+      font-size: 0.92rem;
+      color: var(--slate);
+      line-height: 1.75;
+      font-weight: 300;
+    }
+    .highlights-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+    .highlights-list li {
+      font-size: 0.86rem;
+      color: var(--slate);
+      padding-left: 18px;
+      position: relative;
+    }
+    .highlights-list li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+      font-size: 0.75rem;
+      top: 2px;
+    }
+    .view-gallery-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--navy);
+      border: 1.5px solid var(--navy);
+      padding: 10px 22px;
+      border-radius: 5px;
+      font-size: 0.84rem;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      margin-top: 6px;
+      transition: background 0.2s, color 0.2s;
+      width: fit-content;
+    }
+    .view-gallery-btn:hover { background: var(--navy); color: var(--white); }
+    .view-gallery-btn svg { width: 15px; height: 15px; }
+
+    /* ─── LIGHTBOX / BLOG GALLERY ─────────── */
+    .gallery-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(10,17,25,0.97);
+      z-index: 1000;
+      display: none;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+    .gallery-overlay.active { display: flex; }
+
+    .gallery-header {
+      position: sticky;
+      top: 0;
+      background: rgba(10,17,25,0.96);
+      backdrop-filter: blur(8px);
+      padding: 18px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(201,168,76,0.2);
+      z-index: 10;
+    }
+    .gallery-header .g-title {
+      font-family: 'Playfair Display', serif;
+      color: var(--white);
+      font-size: 1.3rem;
+    }
+    .gallery-header .g-sub {
+      color: var(--muted);
+      font-size: 0.8rem;
+      margin-top: 3px;
+    }
+    .close-btn {
+      background: none;
+      border: 1.5px solid rgba(255,255,255,0.25);
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .close-btn:hover { background: rgba(255,255,255,0.1); border-color: var(--gold); }
+
+    .gallery-body { padding: 40px; max-width: 1100px; margin: 0 auto; width: 100%; }
+
+    /* Blog-style intro */
+    .gallery-intro {
+      margin-bottom: 40px;
+      border-left: 3px solid var(--gold);
+      padding-left: 24px;
+    }
+    .gallery-intro .gi-tag {
+      font-size: 0.7rem;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .gallery-intro h2 {
+      font-family: 'Playfair Display', serif;
+      color: var(--white);
+      font-size: 2rem;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+    .gallery-intro p {
+      color: rgba(255,255,255,0.55);
+      font-size: 0.92rem;
+      line-height: 1.7;
+      font-weight: 300;
+      max-width: 680px;
+    }
+    .gallery-intro .gi-meta {
+      display: flex;
+      gap: 20px;
+      margin-top: 14px;
+      flex-wrap: wrap;
+    }
+    .gallery-intro .gi-meta span {
+      font-size: 0.8rem;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Section title inside blog */
+    .gallery-section-title {
+      color: rgba(255,255,255,0.4);
+      font-size: 0.68rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      margin-top: 40px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    /* Featured photo (large) */
+    .gallery-featured {
+      width: 100%;
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 40px;
+      position: relative;
+    }
+    .gallery-featured img {
+      width: 100%;
+      height: 420px;
+      object-fit: cover;
+      display: block;
+    }
+    .gallery-featured .caption {
+      background: rgba(13,27,42,0.85);
+      color: rgba(255,255,255,0.7);
+      font-size: 0.78rem;
+      padding: 10px 18px;
+    }
+
+    /* Blog masonry grid */
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .blog-photo {
+      border-radius: 7px;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+    }
+    .blog-photo img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.35s;
+    }
+    .blog-photo:hover img { transform: scale(1.05); }
+    .blog-photo .photo-caption {
+      background: rgba(13,27,42,0.82);
+      color: rgba(255,255,255,0.75);
+      font-size: 0.75rem;
+      padding: 8px 12px;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      transform: translateY(100%);
+      transition: transform 0.3s;
+    }
+    .blog-photo:hover .photo-caption { transform: translateY(0); }
+
+    /* Blog narrative paragraph */
+    .blog-paragraph {
+      color: rgba(255,255,255,0.6);
+      font-size: 0.91rem;
+      line-height: 1.8;
+      font-weight: 300;
+      max-width: 760px;
+      margin-bottom: 28px;
+    }
+
+    /* Highlight stats row */
+    .stats-row {
+      display: flex;
+      gap: 20px;
+      margin: 32px 0;
+      flex-wrap: wrap;
+    }
+    .stat-box {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 8px;
+      padding: 18px 24px;
+      text-align: center;
+      flex: 1;
+      min-width: 120px;
+    }
+    .stat-box .num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: var(--gold);
+    }
+    .stat-box .lbl {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 4px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Quote block */
+    .quote-block {
+      border-left: 3px solid var(--gold);
+      padding: 16px 24px;
+      margin: 28px 0;
+      background: rgba(255,255,255,0.03);
+      border-radius: 0 6px 6px 0;
+    }
+    .quote-block p {
+      color: rgba(255,255,255,0.75);
+      font-size: 1rem;
+      font-style: italic;
+      line-height: 1.65;
+    }
+    .quote-block cite {
+      display: block;
+      margin-top: 8px;
+      font-size: 0.78rem;
+      color: var(--gold);
+      font-style: normal;
+    }
+
+    /* ─── FOOTER ──────────────────────────── */
+    footer {
+      background: var(--navy);
+      color: rgba(255,255,255,0.4);
+      text-align: center;
+      padding: 28px 48px;
+      font-size: 0.8rem;
+    }
+    footer span { color: var(--gold); }
+
+    /* ─── RESPONSIVE ──────────────────────── */
+    @media (max-width: 860px) {
+      nav { padding: 0 20px; }
+      .section { padding: 40px 20px; }
+      .hero { padding: 48px 20px 40px; }
+      .event-block { grid-template-columns: 1fr; }
+      .event-block.reverse { direction: ltr; }
+      .gallery-body { padding: 24px 16px; }
+      .blog-grid { grid-template-columns: 1fr 1fr; }
+      .gallery-featured img { height: 240px; }
+    }
+    @media (max-width: 540px) {
+      .blog-grid { grid-template-columns: 1fr; }
+      .stats-row { flex-direction: column; }
+    }
+
+    /* ─── REGISTRATION MODAL ──────────────── */
+    .reg-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(8, 15, 24, 0.80);
+      backdrop-filter: blur(5px);
+      z-index: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.22s ease;
+    }
+    .reg-backdrop.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .reg-card {
+      background: var(--navy);
+      border: 1.5px solid rgba(201,168,76,0.35);
+      border-radius: 14px;
+      width: 100%;
+      max-width: 520px;
+      max-height: 88vh;
+      overflow-y: auto;
+      overflow-x: hidden;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.5);
+      scrollbar-width: thin;
+      scrollbar-color: rgba(201,168,76,0.25) transparent;
+      transform: translateY(20px);
+      transition: transform 0.22s ease;
+    }
+    .reg-backdrop.active .reg-card {
+      transform: translateY(0);
+    }
+
+    .reg-card-header {
+      background: linear-gradient(135deg, #0d1b2a 60%, #162436);
+      border-bottom: 1.5px solid rgba(201,168,76,0.25);
+      padding: 26px 30px 22px;
+      position: relative;
+    }
+    .reg-card-header .reg-tag {
+      font-size: 0.68rem;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+    .reg-card-header h3 {
+      font-family: 'Playfair Display', serif;
+      color: var(--white);
+      font-size: 1.35rem;
+      line-height: 1.25;
+      padding-right: 40px;
+    }
+    .reg-card-header p {
+      color: rgba(255,255,255,0.45);
+      font-size: 0.8rem;
+      margin-top: 5px;
+    }
+    .reg-close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.6);
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+      flex-shrink: 0;
+    }
+    .reg-close-btn:hover {
+      background: rgba(201,168,76,0.15);
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .reg-card-body { padding: 24px 28px 28px; }
+
+    .reg-section-label {
+      font-size: 0.68rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(201,168,76,0.7);
+      margin-bottom: 14px;
+    }
+    .reg-divider {
+      border: none;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      margin: 4px 0 18px;
+    }
+
+    .reg-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px 16px;
+      margin-bottom: 14px;
+      align-items: start;
+    }
+    .reg-row.full { grid-template-columns: 1fr; }
+
+    .reg-field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .reg-field label {
+      font-size: 0.73rem;
+      font-weight: 500;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+    }
+    .reg-field label .req { color: var(--gold); margin-left: 2px; }
+
+    .reg-field input,
+    .reg-field select,
+    .reg-field textarea {
+      background: rgba(255,255,255,0.05);
+      border: 1.5px solid rgba(255,255,255,0.1);
+      border-radius: 7px;
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.87rem;
+      padding: 9px 13px;
+      outline: none;
+      transition: border-color 0.18s, background 0.18s;
+      width: 100%;
+      min-height: 38px;
+      line-height: 1.4;
+    }
+    .reg-field input::placeholder,
+    .reg-field textarea::placeholder { color: rgba(255,255,255,0.22); }
+    .reg-field input:focus,
+    .reg-field select:focus,
+    .reg-field textarea:focus {
+      border-color: var(--gold);
+      background: rgba(201,168,76,0.05);
+    }
+    .reg-field input.error,
+    .reg-field select.error { border-color: #e05a5a; }
+
+    .reg-field select {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='11' fill='none' viewBox='0 0 24 24' stroke='%238a9aaa' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 13px center;
+      padding-right: 34px;
+    }
+    .reg-field select option { background: #0d1b2a; color: white; }
+    .reg-field textarea { resize: none; height: 76px; min-height: unset; }
+
+    .reg-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: flex-end;
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255,255,255,0.07);
+    }
+    .reg-cancel-btn {
+      background: transparent;
+      border: 1.5px solid rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.5);
+      padding: 9px 20px;
+      border-radius: 6px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.84rem;
+      cursor: pointer;
+      transition: border-color 0.18s, color 0.18s;
+    }
+    .reg-cancel-btn:hover { border-color: rgba(255,255,255,0.35); color: rgba(255,255,255,0.8); }
+
+    .reg-submit-btn {
+      background: var(--gold);
+      border: none;
+      color: var(--navy);
+      padding: 9px 24px;
+      border-radius: 6px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.84rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      transition: background 0.18s;
+    }
+    .reg-submit-btn:hover { background: var(--gold-light); }
+    .reg-submit-btn svg { width: 13px; height: 13px; flex-shrink: 0; }
+
+    /* ── Success State ── */
+    .reg-success {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 44px 28px;
+      text-align: center;
+      gap: 13px;
+    }
+    .reg-success.visible { display: flex; }
+
+    .success-icon {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: rgba(201,168,76,0.12);
+      border: 2px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 4px;
+    }
+    .success-icon svg { width: 26px; height: 26px; color: var(--gold); }
+    .reg-success h4 {
+      font-family: 'Playfair Display', serif;
+      color: var(--white);
+      font-size: 1.25rem;
+    }
+    .reg-success p {
+      color: rgba(255,255,255,0.5);
+      font-size: 0.84rem;
+      line-height: 1.6;
+      max-width: 290px;
+    }
+    .reg-success .reg-id {
+      background: rgba(201,168,76,0.1);
+      border: 1px solid rgba(201,168,76,0.3);
+      color: var(--gold);
+      font-size: 0.76rem;
+      letter-spacing: 1.5px;
+      padding: 6px 18px;
+      border-radius: 20px;
+    }
+    .done-btn {
+      margin-top: 4px;
+      background: var(--gold);
+      color: var(--navy);
+      border: none;
+      padding: 9px 28px;
+      border-radius: 6px;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600;
+      font-size: 0.84rem;
+      cursor: pointer;
+      transition: background 0.18s;
+    }
+    .done-btn:hover { background: var(--gold-light); }
+
+    @media (max-width: 540px) {
+      .reg-row { grid-template-columns: 1fr; }
+      .reg-card-header { padding: 20px 20px 18px; }
+      .reg-card-body { padding: 18px 20px 22px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════ NAV ═══════════════════════════ -->
+<nav>
+  <div class='nav-logo'>Ragiv Gandhi University Of Knowledge and Technology</div>
+  <div class="nav-links">
+  <a href="javascript:void(0)" onclick="scrollToSection('past-events')">Events</a>
+  <a href="javascript:void(0)" onclick="scrollToSection('upcoming')">Registration</a>
+  <a href="#">Gallery</a>
+<a href="admin.html">Admin</a>
+</div>
+</nav>
+
+<!-- ═══════════════════════════════ HERO ══════════════════════════ -->
+<div class="hero">
+  <div class="hero-eyebrow">RGUKT IDUPULAPAYA &mdash; Campus Life</div>
+  <h1>Events &amp; Celebrations</h1>
+  <p>A chronicle of our campus milestones, cultural festivals, and academic events — past and upcoming.</p>
+</div>
+
+
+
+<!-- ═══════════════════ PAST EVENTS ═══════════════════════════════ -->
+<div id="past-events">
+  <div class="section">
+    <div class="section-header">
+      <h2>Past Events</h2>
+      <span class="count-badge">3 Events</span>
+    </div>
+
+    <div class="events-list">
+
+      <!-- ── EVENT 1 ── -->
+      <div class="event-block">
+        <div class="event-gallery-grid">
+          <div class="thumb" onclick="openGallery('techfest')">
+            <img src="/home/sreevanichalla/Desktop/rgukt_website/WhatsApp Image 2026-04-11 at 14.22.50.jpeg" alt="Tech Fest Main Stage"/>
+            <div class="thumb-overlay"><span>View Gallery</span></div>
+          </div>
+          <div class="thumb" onclick="openGallery('techfest')">
+            <img src="/home/sreevanichalla/Desktop/rgukt_website/WhatsApp Image 2026-04-11 at 14.22.49.jpeg" alt="Tech Fest Workshop"/>
+            <div class="thumb-overlay"><span>View Gallery</span></div>
+          </div>
+          <div class="thumb" onclick="openGallery('techfest')">
+            <img src="/home/sreevanichalla/Desktop/rgukt_website/WhatsApp Image 2026-04-11 at 15.28.57.jpeg" alt="Tech Fest Audience"/>
+            <div class="thumb-overlay"><span>View Gallery</span></div>
+          </div>
+        </div>
+
+        <div class="event-info">
+          <span class="event-tag">Technology &bull; Annual</span>
+          <h2>Tech Fest 2026 – AADHYA</h2>
+          <div class="event-meta-row">
+            <div class="meta-item">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              fEB 26–28, 2026
+            </div>
+            <div class="meta-item">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+              CSE BLOCK
+            </div>
+            <div class="meta-item">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              200+ Attendees
+            </div>
+          </div>
+          <p class="event-desc">Aadhya  2026 was our biggest tech festival yet, featuring a 24-hour hackathon, robotics competitions, guest talks from engineers at top firms, and an AI art installation that drew lines throughout the day. Students from 18 colleges across the state participated, making it a truly regional celebration of innovation.</p>
+          <ul class="highlights-list">
+            <li>Best Hack Award won by Team Nexus (CSE Dept.) for their waste-sorting robot</li>
+            <!-- <li>Keynote by Dr. Priya Menon, Director of AI Research, IIT Chennai</li> -->
+            <li>12 workshops on AR/VR, ML, and embedded systems</li>
+            <li>₹2.4 lakh in total prize money distributed</li>
+          </ul>
+          <a href="javascript:void(0)" class="view-gallery-btn" onclick="openGallery('techfest')">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            View Gallery
+          </a>
+        </div>
+      </div>
+
+      <!-- ── EVENT 2 (reversed) ── -->
+      <div class="event-block reverse">
+        <div class="event-gallery-grid">
+          <div class="thumb" onclick="openGallery('cultfest')">
+            <img src="/home/user/Documents/WhatsApp Image 2026-04-11 at 14.22.37.jpeg" alt="Cultural Fest Dance"/>
+            <div class="thumb-overlay"><span>View Gallery</span></div>
+          </div>
+          <div class="thumb" onclick="openGallery('cultfest')">
+            <img src="/home/user/Documents/WhatsApp Image 2026-04-11 at 14.22.35.jpeg" alt="Cultural Fest Music"/>
+            <div class="thumb-overlay"><span>View Gallery</span></div>
+          </div>
+          <div class="thumb" onclick="openGallery('cultfest')">
+            <img src="/home/user/Documents/WhatsApp Image 2026-04-11 at 14.22.36.jpeg" alt="Cultural Fest Crowd"/>
+            <div class="thumb-overlay"><span>View Gallery</span></div>
+          </div>
+        </div>
+
+        <div class="event-info">
+          <span class="event-tag">Culture &bull; Music &bull; Dance</span>
+          <h2>Arohana 2026 – Cultural Extravaganza</h2>
+          <div class="event-meta-row">
+            <div class="meta-item">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              JAN  3–4, 2026
+            </div>
+            <div class="meta-item">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+              Open Grounds
+            </div>
+            <div class="meta-item">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              2,500+ Attendees
+            </div>
+          </div>
+          <p class="event-desc">AROHANA, the Pre-Pongal celebration, marked the joyful beginning of the harvest festival with vibrant traditions and cultural spirit.
+The event beautifully showcased the richness of our heritage through rangoli, music, dance, and festive enthusiasm.</p>
+          <ul class="highlights-list">
+            <li>Opening ceremony with a classical Bharatanatyam performance by the Dance Society</li>
+            <li>Guest performance by indie artist Ananya Krishnan on Night 2</li>
+            <li>Inter-college ramp walk competition with 14 participating colleges</li>
+            <li>Best Cultural Club trophy awarded to the Fine Arts Society</li>
+          </ul>
+          <a href="javascript:void(0)" class="view-gallery-btn" onclick="openGallery('cultfest')">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            View Gallery
+          </a>
+        </div>
+      </div>
+
+      <!-- ── EVENT 3 ── -->
+      <div class="event-block">
+        <div class="event-gallery-grid">
+          <div class="thumb" onclick="openGallery('sports')">
+            <img src="/home/user/Documents/WhatsApp Image 2026-04-11 at 14.23.05.jpeg" alt="Sports Day Track"/>
+            <div class="thumb-overlay"><span>View Gallery</span></div>
+          </div>
+          <div class="thumb" onclick="openGallery('sports')">
+            <img src="/home/user/Documents/WhatsApp Image 2026-04-11 at 14.23.04.jpeg" alt="Sports Day Football"/>
+            <div class="thumb-overlay"><span>View Gallery</span></div>
+          </div>
+          <div class="thumb" onclick="openGallery('sports')">
+            <img src="/home/user/Documents/WhatsApp Image 2026-04-11 at 14.23.04(1).jpeg" alt="Sports Day Awards"/>
+            <div class="thumb-overlay"><span>View Gallery</span></div>
+          </div>
+        </div>
+
+        <div class="event-info">
+          <span class="event-tag">Sports &bull; Athletics</span>
+          <h2>Alvida 2026 – CSE Farewell event</h2>
+          <div class="event-meta-row">
+            <div class="meta-item">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              April 1-2, 2026
+            </div>
+            <div class="meta-item">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+              College Sports Ground
+            </div>
+            <div class="meta-item">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              800+ Participants
+            </div>
+          </div>
+          <p class="event-desc">ALVIDA — a heartfelt farewell organized by the CSE branch, marking the end of a beautiful journey and the beginning of new dreams.
+It was an evening filled with emotions, laughter, memories, and gratitude, celebrating the bond between juniors and seniors.</p>
+          <ul class="highlights-list">
+            <li>Computer Science  Dept. won the Overall Champions Trophy</li>
+            <li>Kavya R. (III Year, CSE) broke the college record in 400m sprint</li>
+            <li>Chess club members won gold in district-level qualifiers held the same week</li>
+            <li>First-ever wheelchair racing event introduced this year</li>
+          </ul>
+          <a href="javascript:void(0)" class="view-gallery-btn" onclick="openGallery('sports')">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            View Gallery
+          </a>
+        </div>
+      </div>
+
+    </div><!-- /events-list -->
+  </div>
+</div>
+<!-- ═══════════════════ UPCOMING EVENTS ══════════════════════════ -->
+ <section id="upcoming">
+  <div class="section">
+    <div class="section-header">
+      <h2>UPCOMING Events</h2>
+      <!-- <span class="count-badge">3 Scheduled</span> -->
+    </div>
+
+    <div class="upcoming-grid">
+
+      <!-- Card 1 -->
+      <div class="upcoming-card">
+        <div class="date-chip">
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          april 2, 2026
+        </div>
+        <h3>ALVIDA 2K26 by CSE</h3>
+        <p>ALVIDA — a heartfelt farewell organized by the CSE branch, marking the end of a beautiful journey and the beginning of new dreams.
+It was an evening filled with emotions, laughter, memories, and gratitude, celebrating the bond between juniors and seniors.</p>
+        <div class="meta">
+          <span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          SAC building
+          </span>
+          <span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            9:00 AM – 9:00 PM
+          </span>
+        </div>
+        <button class="register-btn" onclick="openRegister('Alvida 2026', 'April 1-2, 2026 · SAC BUILDING')">Register Now</button>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="upcoming-card">
+        <div class="date-chip">
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        jan 3-4, 2026
+        </div>
+        <h3>AROHANA – PRE PONGAL EVENT 2K26</h3>
+        <p>AROHANA, the Pre-Pongal celebration, marked the joyful beginning of the harvest festival with vibrant traditions and cultural spirit.
+The event beautifully showcased the richness of our heritage through rangoli, music, dance, and festive enthusiasm.</p>
+        <div class="meta">
+          <span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+            CSE BLOCK 
+          </span>
+          <span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            8:00 AM – 9:00 PM
+          </span>
+        </div>
+        <button class="register-btn" onclick="openRegister('AROHANA– Rangoli 2026', 'JAN 3, 2026 · CSE BLOCK')">Register Now</button>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="upcoming-card">
+        <div class="date-chip">
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          feb 26-28, 2026
+        </div>
+        <h3>AADHYA - a TECH FEST</h3>
+        <p>The annual graduation ceremony honouring the outgoing batch of 2021–2025. Chief Guest address, gold medal distribution, and farewell performances by the student council.</p>
+        <div class="meta">
+          <span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+            CSE BLOCK
+          </span>
+          <span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            8:00 AM – 8:00 PM
+          </span>
+        </div>
+        <button class="register-btn" onclick="openRegister('AADHYA 2026', 'FEB 26-28, 2026· Convocation Hall')">Register Now</button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ REGISTRATION MODAL ════════════════════════ -->
+<div class="reg-backdrop" id="regBackdrop">
+  <div class="reg-card" id="regCard">
+
+    <div class="reg-card-header">
+      <div class="reg-tag">RGUKT Idupulapaya &mdash; Event Registration</div>
+      <h3 id="regEventTitle">Event Name</h3>
+      <p id="regEventDate">Date &amp; Venue</p>
+      <button class="reg-close-btn" onclick="closeRegister()">&#x2715;</button>
+    </div>
+
+    <div class="reg-card-body" id="regFormArea">
+
+      <div class="reg-section-label">Personal Information</div>
+      <div class="reg-row">
+        <div class="reg-field">
+          <label>Full Name <span class="req">*</span></label>
+          <input type="text" id="reg_name" placeholder="e.g. Arun Kumar" />
+        </div>
+        <div class="reg-field">
+          <label>Roll Number <span class="req">*</span></label>
+          <input type="text" id="reg_id" placeholder="e.g. S20210001" />
+        </div>
+      </div>
+      <div class="reg-row">
+        <div class="reg-field">
+          <label>Email Address <span class="req">*</span></label>
+          <input type="email" id="reg_email" placeholder="you@rgukt.ac.in" />
+        </div>
+        <div class="reg-field">
+          <label>Phone Number</label>
+          <input type="tel" id="reg_phone" placeholder="+91 98765 43210" />
+        </div>
+      </div>
+
+      <hr class="reg-divider"/>
+      <div class="reg-section-label">Academic Details</div>
+      <div class="reg-row">
+        <div class="reg-field">
+          <label>Department <span class="req">*</span></label>
+          <select id="reg_dept">
+            <option value="" disabled selected>Select Department</option>
+            <option>Computer Science &amp; Engineering</option>
+            <option>Elanectronics &amp; Communication Engineering</option>
+            <option>Electrical &amp; Electronics Engineering</option>
+            <option>Mechanical Engineering</option>
+            <option>Civil Engineering</option>
+            <option>Chemical Engineering</option>
+            <option>Metallurgical &amp; Materials Engineering</option>
+            <option>Basic Sciences &amp; Humanities</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="reg-field">
+          <label>Year of Study <span class="req">*</span></label>
+          <select id="reg_year">
+            <option value="" disabled selected>Select Year</option>
+            <option>PUC – I Year</option>
+            <option>PUC – II Year</option>
+            <option>B.Tech – I Year</option>
+            <option>B.Tech – II Year</option>
+            <option>B.Tech – III Year</option>
+            <option>B.Tech – IV Year</option>
+          </select>
+        </div>
+      </div>
+      <div class="reg-row">
+        <div class="reg-field">
+          <label>Section</label>
+          <input type="text" id="reg_section" placeholder="e.g. A, B, C" />
+        </div>
+        <div class="reg-field">
+          <label>Faculty Advisor</label>
+          <input type="text" id="reg_advisor" placeholder="e.g. Dr. Rama Rao" />
+        </div>
+      </div>
+
+      <hr class="reg-divider"/>
+      <div class="reg-section-label">Additional Info</div>
+      <div class="reg-row full">
+        <div class="reg-field">
+          <label>Reason / Expectations</label>
+          <textarea id="reg_reason" placeholder="Briefly describe why you want to attend..."></textarea>
+        </div>
+      </div>
+
+      <div class="reg-actions">
+        <button class="reg-cancel-btn" onclick="closeRegister()">Cancel</button>
+        <button class="reg-submit-btn" onclick="submitRegister()">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          Submit Registration
+        </button>
+      </div>
+    </div>
+
+    <div class="reg-success" id="regSuccess">
+      <div class="success-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <h4>Registration Confirmed!</h4>
+      <p>You have been successfully registered. A confirmation with event details will be sent to your email.</p>
+      <div class="reg-id" id="regConfirmId">REG-RGUKT-000000</div>
+      <button class="done-btn" onclick="closeRegister()">Done</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════ GALLERY OVERLAY (Blog Style) ══════════════ -->
+<div class="gallery-overlay" id="galleryOverlay">
+  <div class="gallery-header">
+    <div>
+      <div class="g-title" id="galleryTitle">Event Gallery</div>
+      <div class="g-sub" id="gallerySub">Photo Journal</div>
+    </div>
+    <button class="close-btn" onclick="closeGallery()">&#x2715;</button>
+  </div>
+  <div class="gallery-body" id="galleryBody"></div>
+</div>
+
+<!-- ═══════════════════ FOOTER ════════════════════════════════════ -->
+<footer>
+  &copy; 2025 <span>Rajiv Gandhi University of Knowledge and Technology</span>. All rights reserved. &nbsp;|&nbsp; RGUKT Idupulapaya
+</footer>
+
+<!-- ═══════════════════ SCRIPTS ═══════════════════════════════════ -->
+<script>
+  /* ── Gallery Data ── */
+  const galleryData = {
+    techfest: {
+      title: 'Tech Fest 2025 – AADHYA',
+      sub: 'Feb 26–28, 2026 &nbsp;|&nbsp; Main Auditorium',
+      tag: 'Technology · Annual Event',
+      desc: 'InnovatIQ 2024 was a landmark event for RGUKT, drawing participation from students and professionals across the region. From the buzzing hackathon floor to the keynote stage, every moment was a testament to the innovative spirit that defines our campus.',
+      stats: [
+        { num: '200+', lbl: 'Attendees' },
+        { num: '1', lbl: 'Colleges' },
+        { num: '4', lbl: 'Workshops' },
+        { num: '₹5.6k', lbl: 'Prize Pool' }
+      ],
+      featured: {
+        src: '/home/sreevanichalla/Desktop/WhatsApp Image 2026-04-11 at 15.46.55.jpeg',
+        caption: 'The main stage during the opening keynote of InnovatIQ 2024.'
+      },
+      quote: {
+        text: 'Walking into the hackathon hall at midnight and seeing 300 students still coding with the same energy as hour one — that moment told me everything about what RGUKT stands for.',
+        by: 'Dr. Priya Menon, Guest Speaker & Keynote'
+      },
+      para1: 'Day one kicked off with a bang as the hackathon began at 6 AM and teams raced to ideate, prototype, and pitch. Parallel workshops on machine learning, IoT, and AR/VR ran throughout the auditorium wings. The robotics arena saw some of the most creative designs — autonomous navigation, pick-and-place arms, and even a drone built in 18 hours.',
+      photos: [
+        { src: '/home/sreevanichalla/Desktop/WhatsApp Image 2026-04-11 at 15.46.51.jpeg', cap: 'Workshop – Machine Learning Fundamentals' },
+        { src: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=700&q=80', cap: 'Panel Discussion – Future of AI in India' },
+        { src: '/home/sreevanichalla/Desktop/WhatsApp Image 2026-04-11 at 14.22.49.jpeg', cap: 'Hackathon Floor – Teams building overnight' },
+        { src: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=700&q=80', cap: 'Robotics Arena – Live demos' },
+         { src: '/home/sreevanichalla/Desktop/WhatsApp Image 2026-04-11 at 15.28.09.jpeg', cap: 'Award Ceremony – Best Hack winners on stage' },
+         { src: 'https://images.unsplash.com/photo-1620325867502-221cfb5faa5f?w=700&q=80', cap: 'AI Art Installation – Visitor crowd' },
+      ],
+      para2: 'Day two saw the project expo take center stage. Over 60 teams displayed working prototypes ranging from healthcare apps to agricultural IoT sensors. The closing ceremony brought the crowd to its feet as Team Nexus was crowned Best Hack.',
+    },
+    cultfest: {
+      title: 'Arohana 2024 – Cultural Extravaganza',
+      sub: 'October 3–4, 2026 &nbsp;|&nbsp; Open Grounds',
+      tag: 'Culture · Music · Dance',
+      desc: 'Three days of unrestrained celebration — Rangoli 2024 painted our campus in colour, rhythm, and joy. From classical recitals at dawn to the indie concert that went deep into the night, every corner of RGUKT was alive.',
+      stats: [
+        { num: '2,500+', lbl: 'Attendees' },
+        { num: '40+', lbl: 'Performances' },
+        { num: '14', lbl: 'Colleges' },
+        { num: '20', lbl: 'Food Stalls' }
+      ],
+      featured: {
+        src: 'https://images.unsplash.com/photo-1504680177321-2e6a879aac86?w=1200&q=80',
+        caption: 'The main stage lit up during the opening ceremony of Rangoli 2024.'
+      },
+      quote: {
+        text: 'The energy when 2,000 people sang along to the closing number was unlike anything I have experienced in years of performing. RGUKT knows how to celebrate.',
+        by: 'Ananya Krishnan, Guest Performer'
+      },
+      para1: 'Day one opened with a spectacular Bharatanatyam performance by the Dance Society, followed by a procession of folk dancers from across Andhra Pradesh. The student-built art exhibit drew a constant crowd, with visitors photographing every canvas. The evening ended with a drum circle open to all students.',
+      photos: [
+        { src: '/home/sreevanichalla/Desktop/WhatsApp Image 2026-04-11 at 14.22.34.jpeg', cap: 'Night Concert – Indie band on stage' },
+        { src: '/home/sreevanichalla/Desktop/WhatsApp Image 2026-04-11 at 14.22.35.jpeg', cap: 'Crowd at the open-air amphitheater' },
+        { src: '/home/sreevanichalla/Desktop/WhatsApp Image 2026-04-11 at 14.22.38.jpeg', cap: 'Classical Dance Performance – Day 1' },
+      
+      ],
+      para2: 'The grand finale on Day 3 featured a sold-out concert by Ananya Krishnan. Rangoli 2024 closed with fireworks and the promise of an even bigger edition next year.',
+    },
+    sports: {
+      title: 'Alvida 2026 – Farewell Event',
+      sub: 'April 1-2, 2026 &nbsp;|&nbsp; College Sports Ground',
+      tag: 'Sports · Athletics',
+      desc: 'Champions League 2024 was a day of grit, sweat, and smiles. With 18 disciplines, 800+ participants, and records broken, this was the most comprehensive Sports Day in RGUKT history.',
+      stats: [
+        { num: '800+', lbl: 'Participants' },
+        { num: '18', lbl: 'Disciplines' },
+        { num: '3', lbl: 'Records Broken' },
+        { num: '60+', lbl: 'Medals Awarded' }
+      ],
+      featured: {
+        src: 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=1200&q=80',
+        caption: 'Athletes on the track during the 100m sprint — the most anticipated event of Sports Day.'
+      },
+      quote: {
+        text: 'When Kavya crossed the finish line and the whole crowd erupted, it was one of those goosebump moments that coaching is all about. She trained for this every single morning.',
+        by: 'Coach Rajan Pillai, Athletics Department'
+      },
+      para1: 'The day began at 6:30 AM with warm-up sessions across the grounds. Track events ran in parallel with the cricket nets and volleyball courts. The 4x100m relay produced the closest finish in recent memory — the margin was less than a second between the top three teams.',
+      photos: [
+        { src: '/home/sreevanichalla/Desktop/WhatsApp Image 2026-04-11 at 14.23.05.jpeg', cap: 'Football Semi-Final – CSE vs Mechanical' },
+        { src: '/home/sreevanichalla/Desktop/WhatsApp Image 2026-04-11 at 14.23.05(1).jpeg', cap: 'Award Ceremony – Medal Distribution' },
+        { src: '/home/sreevanichalla/Downloads/WhatsApp Image 2026-04-11 at 19.45.39(1).jpeg', cap: 'Basketball Final – Packed stands' },
+        { src: '/home/sreevanichalla/Downloads/WhatsApp Image 2026-04-11 at 19.45.39.jpeg', cap: 'Kabaddi – Action from the mat' },
+        { src: 'https://images.unsplash.com/photo-1530549387789-4c1017266635?w=700&q=80', cap: 'Swimming Heats – Pool events' },
+        { src: 'https://images.unsplash.com/photo-1601422407692-ec4eeec1d9b3?w=700&q=80', cap: 'Chess Championship – Concentration on the board' },
+      ],
+      para2: 'The afternoon brought the team sports finals to a head. The football final ended 2-1 in a dramatic penalty shootout. The brand-new wheelchair racing event, introduced for the first time, received a standing ovation from the crowd.',
+    }
+  };
+
+  /* ── Gallery Logic ── */
+  function openGallery(key) {
+    const d = galleryData[key];
+    const overlay = document.getElementById('galleryOverlay');
+    document.getElementById('galleryTitle').innerHTML = d.title;
+    document.getElementById('gallerySub').innerHTML = d.sub;
+
+    const statsHTML = d.stats.map(s => `
+      <div class="stat-box">
+        <div class="num">${s.num}</div>
+        <div class="lbl">${s.lbl}</div>
+      </div>`).join('');
+
+    const photosHTML = d.photos.map(p => `
+      <div class="blog-photo">
+        <img src="${p.src}" alt="${p.cap}" loading="lazy"/>
+        <div class="photo-caption">${p.cap}</div>
+      </div>`).join('');
+
+    document.getElementById('galleryBody').innerHTML = `
+      <div class="gallery-intro">
+        <div class="gi-tag">${d.tag}</div>
+        <h2>${d.title}</h2>
+        <p>${d.desc}</p>
+        <div class="gi-meta"><span>📅 ${d.sub}</span></div>
+      </div>
+      <div class="gallery-featured">
+        <img src="${d.featured.src}" alt="Featured Photo"/>
+        <div class="caption">${d.featured.caption}</div>
+      </div>
+      <div class="stats-row">${statsHTML}</div>
+      <p class="blog-paragraph">${d.para1}</p>
+      <div class="gallery-section-title">Photo Journal</div>
+      <div class="blog-grid">${photosHTML}</div>
+      <div class="quote-block">
+        <p>"${d.quote.text}"</p>
+        <cite>— ${d.quote.by}</cite>
+      </div>
+      <p class="blog-paragraph">${d.para2}</p>
+    `;
+
+    overlay.classList.add('active');
+    overlay.scrollTop = 0;
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeGallery() {
+    document.getElementById('galleryOverlay').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  /* ── Registration Modal Logic ── */
+  function openRegister(eventName, eventDate) {
+    document.getElementById('regEventTitle').textContent = eventName;
+    document.getElementById('regEventDate').textContent = eventDate;
+
+    // Reset form
+    ['reg_name','reg_id','reg_email','reg_phone','reg_section','reg_advisor','reg_reason'].forEach(id => {
+      const el = document.getElementById(id);
+      el.value = '';
+      el.classList.remove('error');
+    });
+    document.getElementById('reg_dept').selectedIndex = 0;
+    document.getElementById('reg_dept').classList.remove('error');
+    document.getElementById('reg_year').selectedIndex = 0;
+    document.getElementById('reg_year').classList.remove('error');
+
+    // Show form, hide success
+    document.getElementById('regFormArea').style.display = 'block';
+    document.getElementById('regSuccess').classList.remove('visible');
+    document.getElementById('regCard').scrollTop = 0;
+
+    // Open backdrop
+    document.getElementById('regBackdrop').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeRegister() {
+    document.getElementById('regBackdrop').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+ async function submitRegister() {
+  // Get values
+  const name = document.getElementById("reg_name").value.trim();
+  const roll = document.getElementById("reg_id").value.trim();
+  const email = document.getElementById("reg_email").value.trim();
+  const phone = document.getElementById("reg_phone").value.trim();
+  const dept = document.getElementById("reg_dept").value;
+  const year = document.getElementById("reg_year").value;
+
+  // Simple validation
+  if (!name || !roll || !email || !dept || !year) {
+    alert("Please fill all required fields");
+    return;
+  }
+
+  try {
+    const res = await fetch("http://localhost:5000/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        name,
+        roll,
+        email,
+        phone,
+        dept,
+        year,
+        event: document.getElementById("regEventTitle").textContent
+      })
+    });
+
+    const data = await res.json();
+
+    // Show success UI
+    document.getElementById("regFormArea").style.display = "none";
+    document.getElementById("regSuccess").classList.add("visible");
+    document.getElementById("regConfirmId").textContent = data.regId;
+
+  } catch (err) {
+    alert("Error submitting form");
+    console.error(err);
+  }
+}
+</script>
+
+</body>
+</html>
