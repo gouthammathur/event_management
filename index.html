@@ -115,11 +115,44 @@
     #upcoming { background: #fff; border-bottom: 1px solid rgba(0,0,0,0.07); }
     #upcoming .section { padding-top: 56px; padding-bottom: 56px; }
 
-    .upcoming-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
-      gap: 24px;
-    }
+    /* Update this section in your <style> tag */
+.upcoming-grid {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  overflow-x: auto; /* Adds a scrollbar if cards exceed screen width */
+  padding-bottom: 20px; /* Space for the scrollbar */
+  scroll-snap-type: x mandatory; /* Optional: Makes scrolling feel "snappy" */
+}
+
+.upcoming-card {
+  background: var(--cream);
+  border: 1.5px solid rgba(201,168,76,0.3);
+  border-radius: var(--radius);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: box-shadow 0.25s, transform 0.25s;
+  
+  /* Critical for Horizontal Layout */
+  min-width: 320px; /* Sets a consistent width for cards */
+  flex: 0 0 auto;   /* Prevents cards from shrinking */
+  scroll-snap-align: start;
+}
+
+/* Custom Scrollbar Styling (Optional) */
+.upcoming-grid::-webkit-scrollbar {
+  height: 8px;
+}
+.upcoming-grid::-webkit-scrollbar-track {
+  background: rgba(0,0,0,0.05);
+  border-radius: 10px;
+}
+.upcoming-grid::-webkit-scrollbar-thumb {
+  background: var(--gold);
+  border-radius: 10px;
+}
 
     .upcoming-card {
       background: var(--cream);
@@ -848,7 +881,7 @@
 
 <!-- ═══════════════════════════════ NAV ═══════════════════════════ -->
 <nav>
-  <div class='nav-logo'>Ragiv Gandhi University Of Knowledge and Technology</div>
+  <div class='nav-logo'>Rajiv Gandhi University Of Knowledge and Technology</div>
   <div class="nav-links">
   <a href="javascript:void(0)" onclick="scrollToSection('past-events')">Events</a>
   <a href="javascript:void(0)" onclick="scrollToSection('upcoming')">Registration</a>
@@ -876,54 +909,7 @@
 
     <div class="events-list">
 
-      <!-- ── EVENT 1 ── -->
-      <div class="event-block">
-        <div class="event-gallery-grid">
-          <div class="thumb" onclick="openGallery('techfest')">
-            <img src="/home/sreevanichalla/Desktop/rgukt_website/WhatsApp Image 2026-04-11 at 14.22.50.jpeg" alt="Tech Fest Main Stage"/>
-            <div class="thumb-overlay"><span>View Gallery</span></div>
-          </div>
-          <div class="thumb" onclick="openGallery('techfest')">
-            <img src="/home/sreevanichalla/Desktop/rgukt_website/WhatsApp Image 2026-04-11 at 14.22.49.jpeg" alt="Tech Fest Workshop"/>
-            <div class="thumb-overlay"><span>View Gallery</span></div>
-          </div>
-          <div class="thumb" onclick="openGallery('techfest')">
-            <img src="/home/sreevanichalla/Desktop/rgukt_website/WhatsApp Image 2026-04-11 at 15.28.57.jpeg" alt="Tech Fest Audience"/>
-            <div class="thumb-overlay"><span>View Gallery</span></div>
-          </div>
-        </div>
-
-        <div class="event-info">
-          <span class="event-tag">Technology &bull; Annual</span>
-          <h2>Tech Fest 2026 – AADHYA</h2>
-          <div class="event-meta-row">
-            <div class="meta-item">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-              fEB 26–28, 2026
-            </div>
-            <div class="meta-item">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-              CSE BLOCK
-            </div>
-            <div class="meta-item">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-              200+ Attendees
-            </div>
-          </div>
-          <p class="event-desc">Aadhya  2026 was our biggest tech festival yet, featuring a 24-hour hackathon, robotics competitions, guest talks from engineers at top firms, and an AI art installation that drew lines throughout the day. Students from 18 colleges across the state participated, making it a truly regional celebration of innovation.</p>
-          <ul class="highlights-list">
-            <li>Best Hack Award won by Team Nexus (CSE Dept.) for their waste-sorting robot</li>
-            <!-- <li>Keynote by Dr. Priya Menon, Director of AI Research, IIT Chennai</li> -->
-            <li>12 workshops on AR/VR, ML, and embedded systems</li>
-            <li>₹2.4 lakh in total prize money distributed</li>
-          </ul>
-          <a href="javascript:void(0)" class="view-gallery-btn" onclick="openGallery('techfest')">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-            View Gallery
-          </a>
-        </div>
-      </div>
-
+  
       <!-- ── EVENT 2 (reversed) ── -->
       <div class="event-block reverse">
         <div class="event-gallery-grid">
@@ -936,7 +922,7 @@
             <div class="thumb-overlay"><span>View Gallery</span></div>
           </div>
           <div class="thumb" onclick="openGallery('cultfest')">
-            <img src="/home/user/Documents/WhatsApp Image 2026-04-11 at 14.22.36.jpeg" alt="Cultural Fest Crowd"/>
+            <img src="/home/user/Pictures/pongal-2.jpg" alt="Cultural Fest Crowd"/>
             <div class="thumb-overlay"><span>View Gallery</span></div>
           </div>
         </div>
@@ -1021,6 +1007,8 @@ It was an evening filled with emotions, laughter, memories, and gratitude, celeb
           </a>
         </div>
       </div>
+      <!-- ── EVENT 4 ── -->
+</div>
 
     </div><!-- /events-list -->
   </div>
@@ -1030,80 +1018,67 @@ It was an evening filled with emotions, laughter, memories, and gratitude, celeb
   <div class="section">
     <div class="section-header">
       <h2>UPCOMING Events</h2>
-      <!-- <span class="count-badge">3 Scheduled</span> -->
     </div>
 
     <div class="upcoming-grid">
 
-      <!-- Card 1 -->
-      <div class="upcoming-card">
-        <div class="date-chip">
-          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-          april 2, 2026
-        </div>
-        <h3>ALVIDA 2K26 by CSE</h3>
-        <p>ALVIDA — a heartfelt farewell organized by the CSE branch, marking the end of a beautiful journey and the beginning of new dreams.
-It was an evening filled with emotions, laughter, memories, and gratitude, celebrating the bond between juniors and seniors.</p>
-        <div class="meta">
-          <span>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-          SAC building
-          </span>
-          <span>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            9:00 AM – 9:00 PM
-          </span>
-        </div>
-        <button class="register-btn" onclick="openRegister('Alvida 2026', 'April 1-2, 2026 · SAC BUILDING')">Register Now</button>
-      </div>
+    
+     <div class="upcoming-card">
+  <div class="date-chip">
+    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+    SEP 04, 2026
+  </div>
+  <h3>Vasista Event – Krishna Janmashtami</h3>
+  <p>A grand celebration of Lord Krishna’s <br>birth featuring cultural performances,<br>
+     bhajans, and traditional Dahi Handi organized by <br>
+     the Vasista Cultural Club.</p>
+  <div class="meta">
+    <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg> CSE Block</span>
+    <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 10:00 AM – 6:00 PM</span>
+  </div>
+  <button class="register-btn" onclick="openRegister('Krishna Janmashtami', 'Aug 16, 2027 · CSE Block')">Register Now</button>
+</div>
 
-      <!-- Card 2 -->
-      <div class="upcoming-card">
-        <div class="date-chip">
-          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-        jan 3-4, 2026
-        </div>
-        <h3>AROHANA – PRE PONGAL EVENT 2K26</h3>
-        <p>AROHANA, the Pre-Pongal celebration, marked the joyful beginning of the harvest festival with vibrant traditions and cultural spirit.
-The event beautifully showcased the richness of our heritage through rangoli, music, dance, and festive enthusiasm.</p>
-        <div class="meta">
-          <span>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-            CSE BLOCK 
-          </span>
-          <span>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            8:00 AM – 9:00 PM
-          </span>
-        </div>
-        <button class="register-btn" onclick="openRegister('AROHANA– Rangoli 2026', 'JAN 3, 2026 · CSE BLOCK')">Register Now</button>
-      </div>
-
-      <!-- Card 3 -->
-      <div class="upcoming-card">
-        <div class="date-chip">
-          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-          feb 26-28, 2026
-        </div>
-        <h3>AADHYA - a TECH FEST</h3>
-        <p>The annual graduation ceremony honouring the outgoing batch of 2021–2025. Chief Guest address, gold medal distribution, and farewell performances by the student council.</p>
-        <div class="meta">
-          <span>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-            CSE BLOCK
-          </span>
-          <span>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            8:00 AM – 8:00 PM
-          </span>
-        </div>
-        <button class="register-btn" onclick="openRegister('AADHYA 2026', 'FEB 26-28, 2026· Convocation Hall')">Register Now</button>
-      </div>
+<div class="upcoming-card">
+  <div class="date-chip">
+    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+    SEPT 15, 2026
+  </div>
+  <h3>Vinayaka Chavithi Celebration</h3>
+  <p>A devotional festival celebrating Lord
+     Ganesha<br> with idol installation, pooja rituals,<br>
+      cultural activities, and eco-friendly immersion ,<br>
+      awareness programs.</p>
+  <div class="meta">
+    <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg> College Grounds</span>
+    <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 8:00 AM – 7:00 PM</span>
+  </div>
+  <button class="register-btn" onclick="openRegister('Vinayaka Chavithi', 'Sept 7, 2027 · College Grounds')">Register Now</button>
+</div>
+    
+     <div class="upcoming-card">
+  <div class="date-chip">
+    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+    DEC 25, 2026
+  </div>
+  <h3> Christmas Celebrations</h3>
+  <p>December 25th, marking the birth of Jesus Christ. <br>
+    It combines religious services, such as Midnight<br> Mass
+    , with cultural traditions like decorating<br> trees,
+     gift-giving, and sharing meals to <br>promote love and togetherness.
+    </p>
+  <div class="meta">
+    <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg> CSE Block</span>
+    <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 10:00 AM – 6:00 PM</span>
+  </div>
+ <button class="register-btn" onclick="openRegister('Christmas Celebrations', 'Dec 25, 2026 · CSE Block')">
+  Register Now
+</button>
+ </div>
 
     </div>
   </div>
 </section>
-
 <!-- ═══════════════════ REGISTRATION MODAL ════════════════════════ -->
 <div class="reg-backdrop" id="regBackdrop">
   <div class="reg-card" id="regCard">
@@ -1112,7 +1087,7 @@ The event beautifully showcased the richness of our heritage through rangoli, mu
       <div class="reg-tag">RGUKT Idupulapaya &mdash; Event Registration</div>
       <h3 id="regEventTitle">Event Name</h3>
       <p id="regEventDate">Date &amp; Venue</p>
-      <button class="reg-close-btn" onclick="closeRegister()">&#x2715;</button>
+     <button class="reg-close-btn" onclick="closeRegister()">&#x2715;</button>
     </div>
 
     <div class="reg-card-body" id="regFormArea">
@@ -1168,7 +1143,21 @@ The event beautifully showcased the richness of our heritage through rangoli, mu
             <option>B.Tech – III Year</option>
             <option>B.Tech – IV Year</option>
           </select>
+
         </div>
+
+
+<div class="reg-row full">
+  <div class="reg-field">
+    <label>Participation Type <span class="req">*</span></label>
+    <select id="reg_participation">
+      <option value="" disabled selected>Select Type</option>
+      <option value="Volunteer">Volunteer</option>
+      <option value="Quiz">Quiz</option>
+      <option value="Games">Games</option>
+    </select>
+  </div>
+</div>
       </div>
       <div class="reg-row">
         <div class="reg-field">
@@ -1231,62 +1220,34 @@ The event beautifully showcased the richness of our heritage through rangoli, mu
 
 <!-- ═══════════════════ SCRIPTS ═══════════════════════════════════ -->
 <script>
-  /* ── Gallery Data ── */
-  const galleryData = {
-    techfest: {
-      title: 'Tech Fest 2025 – AADHYA',
-      sub: 'Feb 26–28, 2026 &nbsp;|&nbsp; Main Auditorium',
-      tag: 'Technology · Annual Event',
-      desc: 'InnovatIQ 2024 was a landmark event for RGUKT, drawing participation from students and professionals across the region. From the buzzing hackathon floor to the keynote stage, every moment was a testament to the innovative spirit that defines our campus.',
-      stats: [
-        { num: '200+', lbl: 'Attendees' },
-        { num: '1', lbl: 'Colleges' },
-        { num: '4', lbl: 'Workshops' },
-        { num: '₹5.6k', lbl: 'Prize Pool' }
-      ],
-      featured: {
-        src: '/home/sreevanichalla/Desktop/WhatsApp Image 2026-04-11 at 15.46.55.jpeg',
-        caption: 'The main stage during the opening keynote of InnovatIQ 2024.'
-      },
-      quote: {
-        text: 'Walking into the hackathon hall at midnight and seeing 300 students still coding with the same energy as hour one — that moment told me everything about what RGUKT stands for.',
-        by: 'Dr. Priya Menon, Guest Speaker & Keynote'
-      },
-      para1: 'Day one kicked off with a bang as the hackathon began at 6 AM and teams raced to ideate, prototype, and pitch. Parallel workshops on machine learning, IoT, and AR/VR ran throughout the auditorium wings. The robotics arena saw some of the most creative designs — autonomous navigation, pick-and-place arms, and even a drone built in 18 hours.',
-      photos: [
-        { src: '/home/sreevanichalla/Desktop/WhatsApp Image 2026-04-11 at 15.46.51.jpeg', cap: 'Workshop – Machine Learning Fundamentals' },
-        { src: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=700&q=80', cap: 'Panel Discussion – Future of AI in India' },
-        { src: '/home/sreevanichalla/Desktop/WhatsApp Image 2026-04-11 at 14.22.49.jpeg', cap: 'Hackathon Floor – Teams building overnight' },
-        { src: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=700&q=80', cap: 'Robotics Arena – Live demos' },
-         { src: '/home/sreevanichalla/Desktop/WhatsApp Image 2026-04-11 at 15.28.09.jpeg', cap: 'Award Ceremony – Best Hack winners on stage' },
-         { src: 'https://images.unsplash.com/photo-1620325867502-221cfb5faa5f?w=700&q=80', cap: 'AI Art Installation – Visitor crowd' },
-      ],
-      para2: 'Day two saw the project expo take center stage. Over 60 teams displayed working prototypes ranging from healthcare apps to agricultural IoT sensors. The closing ceremony brought the crowd to its feet as Team Nexus was crowned Best Hack.',
-    },
+const galleryData = {
+  
+    
     cultfest: {
-      title: 'Arohana 2024 – Cultural Extravaganza',
-      sub: 'October 3–4, 2026 &nbsp;|&nbsp; Open Grounds',
+      title: 'AArohana 2026 – Cultural Extravaganza',
+      sub: 'January 2–3, 2026 &nbsp;|&nbsp; Open Grounds',
       tag: 'Culture · Music · Dance',
-      desc: 'Three days of unrestrained celebration — Rangoli 2024 painted our campus in colour, rhythm, and joy. From classical recitals at dawn to the indie concert that went deep into the night, every corner of RGUKT was alive.',
+      desc: 'Three days of unrestrained celebration — Rangoli 2026 painted our campus in colour, rhythm, and joy. From classical recitals at dawn to the indie concert that went deep into the night, every corner of RGUKT was alive.',
       stats: [
         { num: '2,500+', lbl: 'Attendees' },
         { num: '40+', lbl: 'Performances' },
         { num: '14', lbl: 'Colleges' },
         { num: '20', lbl: 'Food Stalls' }
       ],
-      featured: {
-        src: 'https://images.unsplash.com/photo-1504680177321-2e6a879aac86?w=1200&q=80',
-        caption: 'The main stage lit up during the opening ceremony of Rangoli 2024.'
-      },
+     featured: {
+  type: "video",
+  src: "/home/user/Downloads/Aarohana 2k26 celebrations 🥳 😎 Pre-pongal EventVibes 😍😍😍Video and editing credits goes to @.mp4",
+  caption: "Tech Fest opening ceremony highlights"
+},
       quote: {
         text: 'The energy when 2,000 people sang along to the closing number was unlike anything I have experienced in years of performing. RGUKT knows how to celebrate.',
         by: 'Ananya Krishnan, Guest Performer'
       },
       para1: 'Day one opened with a spectacular Bharatanatyam performance by the Dance Society, followed by a procession of folk dancers from across Andhra Pradesh. The student-built art exhibit drew a constant crowd, with visitors photographing every canvas. The evening ended with a drum circle open to all students.',
       photos: [
-        { src: '/home/sreevanichalla/Desktop/WhatsApp Image 2026-04-11 at 14.22.34.jpeg', cap: 'Night Concert – Indie band on stage' },
-        { src: '/home/sreevanichalla/Desktop/WhatsApp Image 2026-04-11 at 14.22.35.jpeg', cap: 'Crowd at the open-air amphitheater' },
-        { src: '/home/sreevanichalla/Desktop/WhatsApp Image 2026-04-11 at 14.22.38.jpeg', cap: 'Classical Dance Performance – Day 1' },
+        { src: '/home/user/Documents/Screenshot_2026_0412_190113.jpg', cap: 'Awards' },
+        { src: '/home/user/Documents/Screenshot_2026_0412_190158.jpg', cap: 'Awards' },
+        { src: '/home/user/Documents/Screenshot_2026_0412_190225.jpg', cap: 'Awards' },
       
       ],
       para2: 'The grand finale on Day 3 featured a sold-out concert by Ananya Krishnan. Rangoli 2024 closed with fireworks and the promise of an even bigger edition next year.',
@@ -1302,154 +1263,196 @@ The event beautifully showcased the richness of our heritage through rangoli, mu
         { num: '3', lbl: 'Records Broken' },
         { num: '60+', lbl: 'Medals Awarded' }
       ],
-      featured: {
-        src: 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=1200&q=80',
-        caption: 'Athletes on the track during the 100m sprint — the most anticipated event of Sports Day.'
-      },
+     featured: {
+  type: "video",
+  src: "/home/user/Downloads/Behind every smile, every light, every perfect moment…there were names, efforts, and sleepless n.mp4",
+  caption: "Tech Fest opening ceremony highlights"
+},
       quote: {
         text: 'When Kavya crossed the finish line and the whole crowd erupted, it was one of those goosebump moments that coaching is all about. She trained for this every single morning.',
         by: 'Coach Rajan Pillai, Athletics Department'
       },
       para1: 'The day began at 6:30 AM with warm-up sessions across the grounds. Track events ran in parallel with the cricket nets and volleyball courts. The 4x100m relay produced the closest finish in recent memory — the margin was less than a second between the top three teams.',
       photos: [
-        { src: '/home/sreevanichalla/Desktop/WhatsApp Image 2026-04-11 at 14.23.05.jpeg', cap: 'Football Semi-Final – CSE vs Mechanical' },
-        { src: '/home/sreevanichalla/Desktop/WhatsApp Image 2026-04-11 at 14.23.05(1).jpeg', cap: 'Award Ceremony – Medal Distribution' },
-        { src: '/home/sreevanichalla/Downloads/WhatsApp Image 2026-04-11 at 19.45.39(1).jpeg', cap: 'Basketball Final – Packed stands' },
-        { src: '/home/sreevanichalla/Downloads/WhatsApp Image 2026-04-11 at 19.45.39.jpeg', cap: 'Kabaddi – Action from the mat' },
-        { src: 'https://images.unsplash.com/photo-1530549387789-4c1017266635?w=700&q=80', cap: 'Swimming Heats – Pool events' },
-        { src: 'https://images.unsplash.com/photo-1601422407692-ec4eeec1d9b3?w=700&q=80', cap: 'Chess Championship – Concentration on the board' },
-      ],
+       
+        { src: '/home/user/Pictures/Screenshot_2026_0412_191428.jpg', cap: 'Award Ceremony – Medal Distribution' },
+        { src: '/home/user/Pictures/Screenshot_2026_0412_191543.jpg', cap: 'Basketball Final – Packed stands' },
+        { src: '/home/user/Pictures/Screenshot_2026_0412_191558.jpg', cap: 'Kabaddi – Action from the mat' },
+        ],
       para2: 'The afternoon brought the team sports finals to a head. The football final ended 2-1 in a dramatic penalty shootout. The brand-new wheelchair racing event, introduced for the first time, received a standing ovation from the crowd.',
     }
   };
 
-  /* ── Gallery Logic ── */
-  function openGallery(key) {
-    const d = galleryData[key];
-    const overlay = document.getElementById('galleryOverlay');
-    document.getElementById('galleryTitle').innerHTML = d.title;
-    document.getElementById('gallerySub').innerHTML = d.sub;
+/* OPEN GALLERY */
+function openGallery(key) {
 
-    const statsHTML = d.stats.map(s => `
-      <div class="stat-box">
-        <div class="num">${s.num}</div>
-        <div class="lbl">${s.lbl}</div>
-      </div>`).join('');
+  const d = galleryData[key];
+  if (!d) return alert("Gallery data missing: " + key);
 
-    const photosHTML = d.photos.map(p => `
-      <div class="blog-photo">
-        <img src="${p.src}" alt="${p.cap}" loading="lazy"/>
-        <div class="photo-caption">${p.cap}</div>
-      </div>`).join('');
+  document.getElementById('galleryTitle').innerText = d.title;
+  document.getElementById('gallerySub').innerText = d.sub;
 
-    document.getElementById('galleryBody').innerHTML = `
-      <div class="gallery-intro">
-        <div class="gi-tag">${d.tag}</div>
-        <h2>${d.title}</h2>
-        <p>${d.desc}</p>
-        <div class="gi-meta"><span>📅 ${d.sub}</span></div>
-      </div>
+  // ✅ FEATURED (FIXED ONCE ONLY)
+  let featuredHTML = "";
+
+  if (d.featured.type === "video") {
+    featuredHTML = `
       <div class="gallery-featured">
-        <img src="${d.featured.src}" alt="Featured Photo"/>
+        <video controls autoplay muted loop style="width:100%; height:420px; object-fit:cover;">
+          <source src="${d.featured.src}" type="video/mp4">
+          Your browser does not support video tag.
+        </video>
         <div class="caption">${d.featured.caption}</div>
       </div>
-      <div class="stats-row">${statsHTML}</div>
-      <p class="blog-paragraph">${d.para1}</p>
-      <div class="gallery-section-title">Photo Journal</div>
-      <div class="blog-grid">${photosHTML}</div>
-      <div class="quote-block">
-        <p>"${d.quote.text}"</p>
-        <cite>— ${d.quote.by}</cite>
-      </div>
-      <p class="blog-paragraph">${d.para2}</p>
     `;
-
-    overlay.classList.add('active');
-    overlay.scrollTop = 0;
-    document.body.style.overflow = 'hidden';
+  } else {
+    featuredHTML = `
+      <div class="gallery-featured">
+        <img src="${d.featured.src}" />
+        <div class="caption">${d.featured.caption}</div>
+      </div>
+    `;
   }
 
-  function closeGallery() {
-    document.getElementById('galleryOverlay').classList.remove('active');
-    document.body.style.overflow = '';
-  }
+  // Stats
+  let statsHTML = `
+    <div class="stats-row">
+      ${d.stats.map(s => `
+        <div class="stat-box">
+          <div class="num">${s.num}</div>
+          <div class="lbl">${s.lbl}</div>
+        </div>
+      `).join("")}
+    </div>
+  `;
 
-  /* ── Registration Modal Logic ── */
-  function openRegister(eventName, eventDate) {
-    document.getElementById('regEventTitle').textContent = eventName;
-    document.getElementById('regEventDate').textContent = eventDate;
+  // Photos
+  let photosHTML = `
+    <div class="gallery-section-title">Photo Highlights</div>
+    <div class="blog-grid">
+      ${d.photos.map(p => `
+        <div class="blog-photo">
+          <img src="${p.src}" />
+          <div class="photo-caption">${p.cap}</div>
+        </div>
+      `).join("")}
+    </div>
+  `;
 
-    // Reset form
-    ['reg_name','reg_id','reg_email','reg_phone','reg_section','reg_advisor','reg_reason'].forEach(id => {
-      const el = document.getElementById(id);
-      el.value = '';
-      el.classList.remove('error');
-    });
-    document.getElementById('reg_dept').selectedIndex = 0;
-    document.getElementById('reg_dept').classList.remove('error');
-    document.getElementById('reg_year').selectedIndex = 0;
-    document.getElementById('reg_year').classList.remove('error');
+  // FINAL RENDER
+  document.getElementById('galleryBody').innerHTML = `
+    <div class="gallery-intro">
+      <div class="gi-tag">${d.tag}</div>
+      <h2>${d.title}</h2>
+      <p>${d.desc}</p>
+    </div>
 
-    // Show form, hide success
-    document.getElementById('regFormArea').style.display = 'block';
-    document.getElementById('regSuccess').classList.remove('visible');
-    document.getElementById('regCard').scrollTop = 0;
+    ${featuredHTML}
+    ${statsHTML}
 
-    // Open backdrop
-    document.getElementById('regBackdrop').classList.add('active');
-    document.body.style.overflow = 'hidden';
-  }
+    <p class="blog-paragraph">${d.para1}</p>
 
-  function closeRegister() {
-    document.getElementById('regBackdrop').classList.remove('active');
-    document.body.style.overflow = '';
-  }
+    ${photosHTML}
 
- async function submitRegister() {
-  // Get values
+    <p class="blog-paragraph">${d.para2}</p>
+
+    <div class="quote-block">
+      <p>“${d.quote.text}”</p>
+      <cite>— ${d.quote.by}</cite>
+    </div>
+  `;
+
+  document.getElementById('galleryOverlay').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}/* CLOSE GALLERY */
+function closeGallery() {
+  document.getElementById('galleryOverlay').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+/* REGISTER */
+function openRegister(name, date) {
+  document.getElementById('regBackdrop').classList.add('active');
+  document.getElementById('regEventTitle').innerText = name;
+  document.getElementById('regEventDate').innerText = date;
+}
+
+function closeRegister() {
+  document.getElementById('regBackdrop').classList.remove('active');
+}
+
+/* SIMPLE SUBMIT FIX */
+async function submitRegister() {
   const name = document.getElementById("reg_name").value.trim();
   const roll = document.getElementById("reg_id").value.trim();
   const email = document.getElementById("reg_email").value.trim();
   const phone = document.getElementById("reg_phone").value.trim();
   const dept = document.getElementById("reg_dept").value;
   const year = document.getElementById("reg_year").value;
+  const participation = document.getElementById("reg_participation").value;
+  const event = document.getElementById("regEventTitle").innerText;
 
-  // Simple validation
-  if (!name || !roll || !email || !dept || !year) {
+  // EMAIL CHECK
+  const emailPattern = /^[a-zA-Z0-9._%+-]+@(rguktrkv\.ac\.in|gmail\.com)$/;
+
+  // ROLL CHECK (R/N/O/S + 6 digits)
+  const rollPattern = /^[RNOS][0-9]{6}$/;
+
+  // PHONE CHECK (10 digits)
+  const phonePattern = /^[0-9]{10}$/;
+
+  if (!name || !roll || !email || !dept || !year || !participation) {
     alert("Please fill all required fields");
     return;
   }
 
+  if (!emailPattern.test(email)) {
+    alert("Email must be @rguktrkv.ac.in or @gmail.com");
+    return;
+  }
+
+  if (!rollPattern.test(roll)) {
+    alert("Roll must start with R/N/O/S followed by 6 digits (e.g. R221088)");
+    return;
+  }
+
+  if (!phonePattern.test(phone)) {
+    alert("Phone must be exactly 10 digits");
+    return;
+  }
+
+  const data = {
+    name,
+    roll,
+    email,
+    phone,
+    dept,
+    year,
+    participation,
+    event
+  };
+
   try {
     const res = await fetch("http://localhost:5000/register", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        name,
-        roll,
-        email,
-        phone,
-        dept,
-        year,
-        event: document.getElementById("regEventTitle").textContent
-      })
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
     });
 
-    const data = await res.json();
+    const result = await res.json();
 
-    // Show success UI
-    document.getElementById("regFormArea").style.display = "none";
-    document.getElementById("regSuccess").classList.add("visible");
-    document.getElementById("regConfirmId").textContent = data.regId;
-
+    if (res.ok) {
+      document.getElementById("regConfirmId").innerText = result.regId;
+      document.getElementById("regFormArea").style.display = "none";
+      document.getElementById("regSuccess").classList.add("visible");
+    } else {
+      alert(result.message || "Registration failed");
+    }
   } catch (err) {
-    alert("Error submitting form");
     console.error(err);
+    alert("Server not reachable");
   }
-}
-</script>
+}</script>
 
 </body>
 </html>
