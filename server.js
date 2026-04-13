@@ -11,11 +11,14 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // MySQL Connection
-const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "gouthammathur2809",
-  database: "rgukt_events"
+const db = mysql.createPool({
+  host: process.env.localhost,
+  user: process.env.root,
+  password: process.env.gouthammathur2809,
+  database: process.env.rgukt_events,
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0
 });
 
 db.connect(err => {
@@ -38,16 +41,15 @@ app.post("/register", (req, res) => {
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
   `;
 
-  db.query(sql,
+  db.query(
+    sql,
     [name, roll, email, phone, dept, year, event, participation, regId],
     (err) => {
       if (err) return res.status(500).json({ message: "Database error" });
       res.json({ message: "Registered successfully", regId });
     }
   );
-});
-
-// GET REGISTRATIONS
+});// GET REGISTRATIONS
 app.get("/registrations", (req, res) => {
   db.query("SELECT * FROM registrations ORDER BY id DESC", (err, results) => {
     if (err) return res.status(500).json({ message: "Database error" });
@@ -60,6 +62,7 @@ app.get("/", (req, res) => {
 app.get("/api/events", (req, res) => {
   res.json({ message: "Events API working" });
 });
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, "0.0.0.0", () => {

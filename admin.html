@@ -118,46 +118,60 @@ tr:hover {
 
 <script>
 async function loadData() {
-  const tableBody = document.getElementById("tableData"); // ✅ FIXED
+  const tableBody = document.getElementById("tableData");
+
+  const API_URL = "https://event-management-t3zr.onrender.com/registrations";
 
   try {
     tableBody.innerHTML = '<tr><td colspan="9">Loading...</td></tr>';
 
     console.log("Fetching data...");
 
-    const response = await fetch("http://localhost:5000/registrations");
+    let response = await fetch(API_URL);
+
+    // 🔁 Retry once if Render is slow (VERY COMMON on mobile)
+    if (!response.ok) {
+      console.log("Retrying...");
+      response = await fetch(API_URL);
+    }
 
     console.log("Response status:", response.status);
+
+    if (!response.ok) {
+      throw new Error("Server error: " + response.status);
+    }
 
     const data = await response.json();
 
     console.log("Data received:", data);
 
     if (!Array.isArray(data)) {
-      tableBody.innerHTML = '<tr><td colspan="9">Invalid server response</td></tr>';
+      tableBody.innerHTML =
+        '<tr><td colspan="9">Invalid server response</td></tr>';
       return;
     }
 
     if (data.length === 0) {
-      tableBody.innerHTML = '<tr><td colspan="9">No registrations found.</td></tr>';
+      tableBody.innerHTML =
+        '<tr><td colspan="9">No registrations found.</td></tr>';
       return;
     }
 
     tableBody.innerHTML = "";
 
-    data.forEach(row => {
+    data.forEach((row) => {
       const tr = document.createElement("tr");
 
       tr.innerHTML = `
-        <td>${row.name || ""}</td>
-        <td>${row.roll || ""}</td>
-        <td>${row.email || ""}</td>
-        <td>${row.phone || ""}</td>
-        <td>${row.dept || ""}</td>
-        <td>${row.year || ""}</td>
-        <td>${row.event || ""}</td>
-        <td>${row.regId || ""}</td>
-        <td>${row.participation || ""}</td>
+        <td>${row.name ?? ""}</td>
+        <td>${row.roll ?? ""}</td>
+        <td>${row.email ?? ""}</td>
+        <td>${row.phone ?? ""}</td>
+        <td>${row.dept ?? ""}</td>
+        <td>${row.year ?? ""}</td>
+        <td>${row.event ?? ""}</td>
+        <td>${row.regId ?? ""}</td>
+        <td>${row.participation ?? ""}</td>
       `;
 
       tableBody.appendChild(tr);
@@ -165,11 +179,16 @@ async function loadData() {
 
   } catch (err) {
     console.error("Error loading data:", err);
-    document.getElementById("tableData").innerHTML =
-      '<tr><td colspan="9" style="color:red;">Failed to load data. Check server</td></tr>';
+
+    tableBody.innerHTML = `
+      <tr>
+        <td colspan="9" style="color:red;">
+          Failed to load data on mobile. Check internet / server.
+        </td>
+      </tr>
+    `;
   }
 }
-
 function login() {
   const user = document.getElementById("adminUser").value;
   const pass = document.getElementById("adminPass").value;

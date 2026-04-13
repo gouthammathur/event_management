@@ -1382,35 +1382,76 @@ function closeRegister() {
   document.getElementById('regBackdrop').classList.remove('active');
 }
 
-/* SIMPLE SUBMIT FIX */async function submitRegister() {
+/* SIMPLE SUBMIT FIX */
+async function submitRegister() {
+  const name = document.getElementById("reg_name").value.trim();
+  const roll = document.getElementById("reg_id").value.trim();
+  const email = document.getElementById("reg_email").value.trim();
+  const phone = document.getElementById("reg_phone").value.trim();
+  const dept = document.getElementById("reg_dept").value;
+  const year = document.getElementById("reg_year").value;
+  const participation = document.getElementById("reg_participation").value;
+  const event = document.getElementById("regEventTitle").innerText;
+
+  // EMAIL CHECK
+  const emailPattern = /^[a-zA-Z0-9._%+-]+@(rguktrkv\.ac\.in|gmail\.com)$/;
+
+  // ROLL CHECK (R/N/O/S + 6 digits)
+  const rollPattern = /^[RNOS][0-9]{6}$/;
+
+  // PHONE CHECK (10 digits)
+  const phonePattern = /^[0-9]{10}$/;
+
+  if (!name || !roll || !email || !dept || !year || !participation) {
+    alert("Please fill all required fields");
+    return;
+  }
+
+  if (!emailPattern.test(email)) {
+    alert("Email must be @rguktrkv.ac.in or @gmail.com");
+    return;
+  }
+
+  if (!rollPattern.test(roll)) {
+    alert("Roll must start with R/N/O/S followed by 6 digits (e.g. R221088)");
+    return;
+  }
+
+  if (!phonePattern.test(phone)) {
+    alert("Phone must be exactly 10 digits");
+    return;
+  }
+
   const data = {
-    name: document.getElementById("reg_name").value,
-    roll: document.getElementById("reg_id").value,
-    email: document.getElementById("reg_email").value,
-    phone: document.getElementById("reg_phone").value,
-    dept: document.getElementById("reg_dept").value,
-    year: document.getElementById("reg_year").value,
-    event: document.getElementById("regEventTitle").innerText,
-    participation: document.getElementById("reg_participation").value
+    name,
+    roll,
+    email,
+    phone,
+    dept,
+    year,
+    participation,
+    event
   };
 
   try {
-    const res = await fetch("https://event-management-t3zr.onrender.com", {
+    const res = await fetch("http://localhost:5000/register", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data)
     });
 
     const result = await res.json();
 
-    alert(result.message || "Success");
-    console.log(result);
-
+    if (res.ok) {
+      document.getElementById("regConfirmId").innerText = result.regId;
+      document.getElementById("regFormArea").style.display = "none";
+      document.getElementById("regSuccess").classList.add("visible");
+    } else {
+      alert(result.message || "Registration failed");
+    }
   } catch (err) {
     console.error(err);
-    alert("Server not reachable ❌");
+    alert("Server not reachable");
   }
 }</script>
 
