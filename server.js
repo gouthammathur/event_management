@@ -11,23 +11,18 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // MySQL Connection
+require("dotenv").config();
+
 const db = mysql.createPool({
-  host: process.env.localhost,
-  user: process.env.root,
-  password: process.env.gouthammathur2809,
-  database: process.env.rgukt_events,
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0
 });
 
-db.connect(err => {
-  if (err) {
-    console.error("DB Connection Failed:", err);
-  } else {
-    console.log("MySQL Connected");
-  }
-});
 
 // REGISTER API
 app.post("/register", (req, res) => {

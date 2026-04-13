@@ -117,33 +117,42 @@ tr:hover {
 </div>
 
 <script>
-async function loadData() {
-  const tableBody = document.getElementById("tableData");
 
+
+ 
+
+
+async function loadData() {
+  let response;
+  
+  const tableBody = document.getElementById("tableData");
   const API_URL = "https://event-management-t3zr.onrender.com/registrations";
 
+  tableBody.innerHTML = '<tr><td colspan="9">Loading...</td></tr>';
+
+  
+
   try {
-    tableBody.innerHTML = '<tr><td colspan="9">Loading...</td></tr>';
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 10000);
 
-    console.log("Fetching data...");
+    response = await fetch(API_URL, {
+      signal: controller.signal
+    });
 
-    let response = await fetch(API_URL);
+    clearTimeout(timeout);
 
-    // 🔁 Retry once if Render is slow (VERY COMMON on mobile)
+  } catch (err) {
+    console.log("First attempt failed, retrying...");
+    response = await fetch(API_URL);
+  }
+
+  try {
     if (!response.ok) {
-      console.log("Retrying...");
-      response = await fetch(API_URL);
-    }
-
-    console.log("Response status:", response.status);
-
-    if (!response.ok) {
-      throw new Error("Server error: " + response.status);
+      throw new Error("Server error");
     }
 
     const data = await response.json();
-
-    console.log("Data received:", data);
 
     if (!Array.isArray(data)) {
       tableBody.innerHTML =
@@ -183,7 +192,7 @@ async function loadData() {
     tableBody.innerHTML = `
       <tr>
         <td colspan="9" style="color:red;">
-          Failed to load data on mobile. Check internet / server.
+          Failed to load data. Check server / internet.
         </td>
       </tr>
     `;
