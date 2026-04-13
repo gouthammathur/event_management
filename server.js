@@ -11,18 +11,17 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // MySQL Connection
-require("dotenv").config();
-
-const db = mysql.createPool({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-  waitForConnections: true,
-  connectionLimit: 10,
-  queueLimit: 0
+const db = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "gouthammathur2809",
+  database: "rgukt_events"
 });
 
+db.connect(err => {
+  if (err) console.error("DB Connection Failed:", err);
+  else console.log("MySQL Connected");
+});
 
 // REGISTER API
 app.post("/register", (req, res) => {
@@ -36,30 +35,23 @@ app.post("/register", (req, res) => {
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
   `;
 
-  db.query(
-    sql,
+  db.query(sql,
     [name, roll, email, phone, dept, year, event, participation, regId],
     (err) => {
       if (err) return res.status(500).json({ message: "Database error" });
       res.json({ message: "Registered successfully", regId });
     }
   );
-});// GET REGISTRATIONS
+});
+
+// GET REGISTRATIONS
 app.get("/registrations", (req, res) => {
   db.query("SELECT * FROM registrations ORDER BY id DESC", (err, results) => {
     if (err) return res.status(500).json({ message: "Database error" });
     res.json(results);
   });
 });
-app.get("/", (req, res) => {
-  res.send("Backend running 🚀");
-});
-app.get("/api/events", (req, res) => {
-  res.json({ message: "Events API working" });
-});
 
-const PORT = process.env.PORT || 5000;
-
-app.listen(PORT, "0.0.0.0", () => {
-  console.log("Server running on port", PORT);
+app.listen(5000, () => {
+  console.log("Server running on http://localhost:5000");
 });
