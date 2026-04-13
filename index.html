@@ -115,44 +115,14 @@
     #upcoming { background: #fff; border-bottom: 1px solid rgba(0,0,0,0.07); }
     #upcoming .section { padding-top: 56px; padding-bottom: 56px; }
 
-    /* Update this section in your <style> tag */
-.upcoming-grid {
-  display: flex;
-  flex-direction: row;
-  gap: 24px;
-  overflow-x: auto; /* Adds a scrollbar if cards exceed screen width */
-  padding-bottom: 20px; /* Space for the scrollbar */
-  scroll-snap-type: x mandatory; /* Optional: Makes scrolling feel "snappy" */
-}
-
-.upcoming-card {
-  background: var(--cream);
-  border: 1.5px solid rgba(201,168,76,0.3);
-  border-radius: var(--radius);
-  padding: 28px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  transition: box-shadow 0.25s, transform 0.25s;
-  
-  /* Critical for Horizontal Layout */
-  min-width: 320px; /* Sets a consistent width for cards */
-  flex: 0 0 auto;   /* Prevents cards from shrinking */
-  scroll-snap-align: start;
-}
-
-/* Custom Scrollbar Styling (Optional) */
-.upcoming-grid::-webkit-scrollbar {
-  height: 8px;
-}
-.upcoming-grid::-webkit-scrollbar-track {
-  background: rgba(0,0,0,0.05);
-  border-radius: 10px;
-}
-.upcoming-grid::-webkit-scrollbar-thumb {
-  background: var(--gold);
-  border-radius: 10px;
-}
+    .upcoming-grid {
+      display: flex;
+      flex-direction: row;
+      gap: 24px;
+      overflow-x: auto;
+      padding-bottom: 20px;
+      scroll-snap-type: x mandatory;
+    }
 
     .upcoming-card {
       background: var(--cream);
@@ -163,7 +133,15 @@
       flex-direction: column;
       gap: 12px;
       transition: box-shadow 0.25s, transform 0.25s;
+      min-width: 320px;
+      flex: 0 0 auto;
+      scroll-snap-align: start;
     }
+
+    .upcoming-grid::-webkit-scrollbar { height: 8px; }
+    .upcoming-grid::-webkit-scrollbar-track { background: rgba(0,0,0,0.05); border-radius: 10px; }
+    .upcoming-grid::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
+
     .upcoming-card:hover {
       box-shadow: 0 8px 28px rgba(13,27,42,0.1);
       transform: translateY(-3px);
@@ -254,9 +232,7 @@
       cursor: pointer;
       position: relative;
     }
-    .event-gallery-grid .thumb:first-child {
-      grid-row: span 2;
-    }
+    .event-gallery-grid .thumb:first-child { grid-row: span 2; }
     .event-gallery-grid .thumb img {
       width: 100%;
       height: 100%;
@@ -389,11 +365,7 @@
       color: var(--white);
       font-size: 1.3rem;
     }
-    .gallery-header .g-sub {
-      color: var(--muted);
-      font-size: 0.8rem;
-      margin-top: 3px;
-    }
+    .gallery-header .g-sub { color: var(--muted); font-size: 0.8rem; margin-top: 3px; }
     .close-btn {
       background: none;
       border: 1.5px solid rgba(255,255,255,0.25);
@@ -412,7 +384,6 @@
 
     .gallery-body { padding: 40px; max-width: 1100px; margin: 0 auto; width: 100%; }
 
-    /* Blog-style intro */
     .gallery-intro {
       margin-bottom: 40px;
       border-left: 3px solid var(--gold);
@@ -453,7 +424,6 @@
       gap: 6px;
     }
 
-    /* Section title inside blog */
     .gallery-section-title {
       color: rgba(255,255,255,0.4);
       font-size: 0.68rem;
@@ -465,7 +435,6 @@
       border-bottom: 1px solid rgba(255,255,255,0.08);
     }
 
-    /* Featured photo (large) */
     .gallery-featured {
       width: 100%;
       border-radius: var(--radius);
@@ -486,7 +455,6 @@
       padding: 10px 18px;
     }
 
-    /* Blog masonry grid */
     .blog-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -521,7 +489,6 @@
     }
     .blog-photo:hover .photo-caption { transform: translateY(0); }
 
-    /* Blog narrative paragraph */
     .blog-paragraph {
       color: rgba(255,255,255,0.6);
       font-size: 0.91rem;
@@ -531,7 +498,6 @@
       margin-bottom: 28px;
     }
 
-    /* Highlight stats row */
     .stats-row {
       display: flex;
       gap: 20px;
@@ -560,7 +526,6 @@
       letter-spacing: 1px;
     }
 
-    /* Quote block */
     .quote-block {
       border-left: 3px solid var(--gold);
       padding: 16px 24px;
@@ -627,7 +592,6 @@
       opacity: 1;
       pointer-events: all;
     }
-
     .reg-card {
       background: var(--navy);
       border: 1.5px solid rgba(201,168,76,0.35);
@@ -643,10 +607,7 @@
       transform: translateY(20px);
       transition: transform 0.22s ease;
     }
-    .reg-backdrop.active .reg-card {
-      transform: translateY(0);
-    }
-
+    .reg-backdrop.active .reg-card { transform: translateY(0); }
     .reg-card-header {
       background: linear-gradient(135deg, #0d1b2a 60%, #162436);
       border-bottom: 1.5px solid rgba(201,168,76,0.25);
@@ -695,9 +656,7 @@
       border-color: var(--gold);
       color: var(--gold);
     }
-
     .reg-card-body { padding: 24px 28px 28px; }
-
     .reg-section-label {
       font-size: 0.68rem;
       letter-spacing: 2px;
@@ -710,7 +669,6 @@
       border-top: 1px solid rgba(255,255,255,0.07);
       margin: 4px 0 18px;
     }
-
     .reg-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -719,12 +677,7 @@
       align-items: start;
     }
     .reg-row.full { grid-template-columns: 1fr; }
-
-    .reg-field {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
+    .reg-field { display: flex; flex-direction: column; gap: 6px; }
     .reg-field label {
       font-size: 0.73rem;
       font-weight: 500;
@@ -733,7 +686,6 @@
       color: rgba(255,255,255,0.5);
     }
     .reg-field label .req { color: var(--gold); margin-left: 2px; }
-
     .reg-field input,
     .reg-field select,
     .reg-field textarea {
@@ -760,7 +712,6 @@
     }
     .reg-field input.error,
     .reg-field select.error { border-color: #e05a5a; }
-
     .reg-field select {
       cursor: pointer;
       appearance: none;
@@ -771,7 +722,6 @@
     }
     .reg-field select option { background: #0d1b2a; color: white; }
     .reg-field textarea { resize: none; height: 76px; min-height: unset; }
-
     .reg-actions {
       display: flex;
       gap: 12px;
@@ -792,7 +742,6 @@
       transition: border-color 0.18s, color 0.18s;
     }
     .reg-cancel-btn:hover { border-color: rgba(255,255,255,0.35); color: rgba(255,255,255,0.8); }
-
     .reg-submit-btn {
       background: var(--gold);
       border: none;
@@ -810,8 +759,6 @@
     }
     .reg-submit-btn:hover { background: var(--gold-light); }
     .reg-submit-btn svg { width: 13px; height: 13px; flex-shrink: 0; }
-
-    /* ── Success State ── */
     .reg-success {
       display: none;
       flex-direction: column;
@@ -822,7 +769,6 @@
       gap: 13px;
     }
     .reg-success.visible { display: flex; }
-
     .success-icon {
       width: 58px;
       height: 58px;
@@ -869,7 +815,6 @@
       transition: background 0.18s;
     }
     .done-btn:hover { background: var(--gold-light); }
-
     @media (max-width: 540px) {
       .reg-row { grid-template-columns: 1fr; }
       .reg-card-header { padding: 20px 20px 18px; }
@@ -883,11 +828,11 @@
 <nav>
   <div class='nav-logo'>Rajiv Gandhi University Of Knowledge and Technology</div>
   <div class="nav-links">
-  <a href="javascript:void(0)" onclick="scrollToSection('past-events')">Events</a>
-  <a href="javascript:void(0)" onclick="scrollToSection('upcoming')">Registration</a>
-  <a href="#">Gallery</a>
-<a href="admin.html">Admin</a>
-</div>
+    <a href="javascript:void(0)" onclick="scrollToSection('past-events')">Events</a>
+    <a href="javascript:void(0)" onclick="scrollToSection('upcoming')">Registration</a>
+    <a href="#">Gallery</a>
+    <a href="admin.html">Admin</a>
+  </div>
 </nav>
 
 <!-- ═══════════════════════════════ HERO ══════════════════════════ -->
@@ -896,8 +841,6 @@
   <h1>Events &amp; Celebrations</h1>
   <p>A chronicle of our campus milestones, cultural festivals, and academic events — past and upcoming.</p>
 </div>
-
-
 
 <!-- ═══════════════════ PAST EVENTS ═══════════════════════════════ -->
 <div id="past-events">
@@ -909,20 +852,19 @@
 
     <div class="events-list">
 
-  
       <!-- ── EVENT 2 (reversed) ── -->
       <div class="event-block reverse">
         <div class="event-gallery-grid">
           <div class="thumb" onclick="openGallery('cultfest')">
-            <img src="/home/user/Documents/WhatsApp Image 2026-04-11 at 14.22.37.jpeg" alt="Cultural Fest Dance"/>
+            <img src="images/WhatsApp Image 2026-04-11 at 14.22.35.jpeg" alt="Cultural Fest Dance"/>
             <div class="thumb-overlay"><span>View Gallery</span></div>
           </div>
           <div class="thumb" onclick="openGallery('cultfest')">
-            <img src="/home/user/Documents/WhatsApp Image 2026-04-11 at 14.22.35.jpeg" alt="Cultural Fest Music"/>
+            <img src="images/WhatsApp Image 2026-04-11 at 14.22.36(1).jpeg" alt="Cultural Fest Music"/>
             <div class="thumb-overlay"><span>View Gallery</span></div>
           </div>
           <div class="thumb" onclick="openGallery('cultfest')">
-            <img src="/home/user/Pictures/pongal-2.jpg" alt="Cultural Fest Crowd"/>
+            <img src="images/WhatsApp Image 2026-04-11 at 14.22.37.jpeg" alt="Cultural Fest Crowd"/>
             <div class="thumb-overlay"><span>View Gallery</span></div>
           </div>
         </div>
@@ -933,7 +875,7 @@
           <div class="event-meta-row">
             <div class="meta-item">
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-              JAN  3–4, 2026
+              JAN 3–4, 2026
             </div>
             <div class="meta-item">
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
@@ -963,15 +905,15 @@ The event beautifully showcased the richness of our heritage through rangoli, mu
       <div class="event-block">
         <div class="event-gallery-grid">
           <div class="thumb" onclick="openGallery('sports')">
-            <img src="/home/user/Documents/WhatsApp Image 2026-04-11 at 14.23.05.jpeg" alt="Sports Day Track"/>
+            <img src="images/WhatsApp Image 2026-04-11 at 14.23.05.jpeg" alt="Sports Day Track"/>
             <div class="thumb-overlay"><span>View Gallery</span></div>
           </div>
           <div class="thumb" onclick="openGallery('sports')">
-            <img src="/home/user/Documents/WhatsApp Image 2026-04-11 at 14.23.04.jpeg" alt="Sports Day Football"/>
+            <img src="images/WhatsApp Image 2026-04-11 at 14.23.04.jpeg" alt="Sports Day Football"/>
             <div class="thumb-overlay"><span>View Gallery</span></div>
           </div>
           <div class="thumb" onclick="openGallery('sports')">
-            <img src="/home/user/Documents/WhatsApp Image 2026-04-11 at 14.23.04(1).jpeg" alt="Sports Day Awards"/>
+            <img src="images/WhatsApp Image 2026-04-11 at 14.23.04(1).jpeg" alt="Sports Day Awards"/>
             <div class="thumb-overlay"><span>View Gallery</span></div>
           </div>
         </div>
@@ -996,7 +938,7 @@ The event beautifully showcased the richness of our heritage through rangoli, mu
           <p class="event-desc">ALVIDA — a heartfelt farewell organized by the CSE branch, marking the end of a beautiful journey and the beginning of new dreams.
 It was an evening filled with emotions, laughter, memories, and gratitude, celebrating the bond between juniors and seniors.</p>
           <ul class="highlights-list">
-            <li>Computer Science  Dept. won the Overall Champions Trophy</li>
+            <li>Computer Science Dept. won the Overall Champions Trophy</li>
             <li>Kavya R. (III Year, CSE) broke the college record in 400m sprint</li>
             <li>Chess club members won gold in district-level qualifiers held the same week</li>
             <li>First-ever wheelchair racing event introduced this year</li>
@@ -1007,14 +949,13 @@ It was an evening filled with emotions, laughter, memories, and gratitude, celeb
           </a>
         </div>
       </div>
-      <!-- ── EVENT 4 ── -->
-</div>
 
     </div><!-- /events-list -->
   </div>
 </div>
+
 <!-- ═══════════════════ UPCOMING EVENTS ══════════════════════════ -->
- <section id="upcoming">
+<section id="upcoming">
   <div class="section">
     <div class="section-header">
       <h2>UPCOMING Events</h2>
@@ -1022,63 +963,61 @@ It was an evening filled with emotions, laughter, memories, and gratitude, celeb
 
     <div class="upcoming-grid">
 
-    
-     <div class="upcoming-card">
-  <div class="date-chip">
-    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-    SEP 04, 2026
-  </div>
-  <h3>Vasista Event – Krishna Janmashtami</h3>
-  <p>A grand celebration of Lord Krishna’s <br>birth featuring cultural performances,<br>
-     bhajans, and traditional Dahi Handi organized by <br>
-     the Vasista Cultural Club.</p>
-  <div class="meta">
-    <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg> CSE Block</span>
-    <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 10:00 AM – 6:00 PM</span>
-  </div>
-  <button class="register-btn" onclick="openRegister('Krishna Janmashtami', 'Aug 16, 2027 · CSE Block')">Register Now</button>
-</div>
+      <div class="upcoming-card">
+        <div class="date-chip">
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          SEP 04, 2026
+        </div>
+        <h3>Vasista Event – Krishna Janmashtami</h3>
+        <p>A grand celebration of Lord Krishna's <br>birth featuring cultural performances,<br>
+           bhajans, and traditional Dahi Handi organized by <br>
+           the Vasista Cultural Club.</p>
+        <div class="meta">
+          <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg> CSE Block</span>
+          <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 10:00 AM – 6:00 PM</span>
+        </div>
+        <button class="register-btn" onclick="openRegister('Krishna Janmashtami', 'Aug 16, 2027 · CSE Block')">Register Now</button>
+      </div>
 
-<div class="upcoming-card">
-  <div class="date-chip">
-    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-    SEPT 15, 2026
-  </div>
-  <h3>Vinayaka Chavithi Celebration</h3>
-  <p>A devotional festival celebrating Lord
-     Ganesha<br> with idol installation, pooja rituals,<br>
-      cultural activities, and eco-friendly immersion ,<br>
-      awareness programs.</p>
-  <div class="meta">
-    <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg> College Grounds</span>
-    <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 8:00 AM – 7:00 PM</span>
-  </div>
-  <button class="register-btn" onclick="openRegister('Vinayaka Chavithi', 'Sept 7, 2027 · College Grounds')">Register Now</button>
-</div>
-    
-     <div class="upcoming-card">
-  <div class="date-chip">
-    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-    DEC 25, 2026
-  </div>
-  <h3> Christmas Celebrations</h3>
-  <p>December 25th, marking the birth of Jesus Christ. <br>
-    It combines religious services, such as Midnight<br> Mass
-    , with cultural traditions like decorating<br> trees,
-     gift-giving, and sharing meals to <br>promote love and togetherness.
-    </p>
-  <div class="meta">
-    <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg> CSE Block</span>
-    <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 10:00 AM – 6:00 PM</span>
-  </div>
- <button class="register-btn" onclick="openRegister('Christmas Celebrations', 'Dec 25, 2026 · CSE Block')">
-  Register Now
-</button>
- </div>
+      <div class="upcoming-card">
+        <div class="date-chip">
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          SEPT 15, 2026
+        </div>
+        <h3>Vinayaka Chavithi Celebration</h3>
+        <p>A devotional festival celebrating Lord
+           Ganesha<br> with idol installation, pooja rituals,<br>
+            cultural activities, and eco-friendly immersion ,<br>
+            awareness programs.</p>
+        <div class="meta">
+          <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg> College Grounds</span>
+          <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 8:00 AM – 7:00 PM</span>
+        </div>
+        <button class="register-btn" onclick="openRegister('Vinayaka Chavithi', 'Sept 7, 2027 · College Grounds')">Register Now</button>
+      </div>
+
+      <div class="upcoming-card">
+        <div class="date-chip">
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          DEC 25, 2026
+        </div>
+        <h3>Christmas Celebrations</h3>
+        <p>December 25th, marking the birth of Jesus Christ. <br>
+          It combines religious services, such as Midnight<br> Mass
+          , with cultural traditions like decorating<br> trees,
+           gift-giving, and sharing meals to <br>promote love and togetherness.
+          </p>
+        <div class="meta">
+          <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg> CSE Block</span>
+          <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 10:00 AM – 6:00 PM</span>
+        </div>
+        <button class="register-btn" onclick="openRegister('Christmas Celebrations', 'Dec 25, 2026 · CSE Block')">Register Now</button>
+      </div>
 
     </div>
   </div>
 </section>
+
 <!-- ═══════════════════ REGISTRATION MODAL ════════════════════════ -->
 <div class="reg-backdrop" id="regBackdrop">
   <div class="reg-card" id="regCard">
@@ -1087,7 +1026,7 @@ It was an evening filled with emotions, laughter, memories, and gratitude, celeb
       <div class="reg-tag">RGUKT Idupulapaya &mdash; Event Registration</div>
       <h3 id="regEventTitle">Event Name</h3>
       <p id="regEventDate">Date &amp; Venue</p>
-     <button class="reg-close-btn" onclick="closeRegister()">&#x2715;</button>
+      <button class="reg-close-btn" onclick="closeRegister()">&#x2715;</button>
     </div>
 
     <div class="reg-card-body" id="regFormArea">
@@ -1143,22 +1082,21 @@ It was an evening filled with emotions, laughter, memories, and gratitude, celeb
             <option>B.Tech – III Year</option>
             <option>B.Tech – IV Year</option>
           </select>
-
         </div>
 
-
-<div class="reg-row full">
-  <div class="reg-field">
-    <label>Participation Type <span class="req">*</span></label>
-    <select id="reg_participation">
-      <option value="" disabled selected>Select Type</option>
-      <option value="Volunteer">Volunteer</option>
-      <option value="Quiz">Quiz</option>
-      <option value="Games">Games</option>
-    </select>
-  </div>
-</div>
+        <div class="reg-row full">
+          <div class="reg-field">
+            <label>Participation Type <span class="req">*</span></label>
+            <select id="reg_participation">
+              <option value="" disabled selected>Select Type</option>
+              <option value="Volunteer">Volunteer</option>
+              <option value="Quiz">Quiz</option>
+              <option value="Games">Games</option>
+            </select>
+          </div>
+        </div>
       </div>
+
       <div class="reg-row">
         <div class="reg-field">
           <label>Section</label>
@@ -1220,11 +1158,15 @@ It was an evening filled with emotions, laughter, memories, and gratitude, celeb
 
 <!-- ═══════════════════ SCRIPTS ═══════════════════════════════════ -->
 <script>
-const galleryData = {
-  
-    
+  /* ── Smooth scroll helper ── */
+  function scrollToSection(id) {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  const galleryData = {
     cultfest: {
-      title: 'AArohana 2026 – Cultural Extravaganza',
+      title: 'Arohana 2026 – Cultural Extravaganza',
       sub: 'January 2–3, 2026 &nbsp;|&nbsp; Open Grounds',
       tag: 'Culture · Music · Dance',
       desc: 'Three days of unrestrained celebration — Rangoli 2026 painted our campus in colour, rhythm, and joy. From classical recitals at dawn to the indie concert that went deep into the night, every corner of RGUKT was alive.',
@@ -1234,11 +1176,11 @@ const galleryData = {
         { num: '14', lbl: 'Colleges' },
         { num: '20', lbl: 'Food Stalls' }
       ],
-     featured: {
-  type: "video",
-  src: "videos/aarohana.mp4",
-  caption: "Tech Fest opening ceremony highlights"
-},
+      featured: {
+        type: "video",
+        src: "videos/aarohana.mp4",
+        caption: "Tech Fest opening ceremony highlights"
+      },
       quote: {
         text: 'The energy when 2,000 people sang along to the closing number was unlike anything I have experienced in years of performing. RGUKT knows how to celebrate.',
         by: 'Ananya Krishnan, Guest Performer'
@@ -1247,10 +1189,9 @@ const galleryData = {
       photos: [
         { src: 'images/image5.jpg', cap: 'Awards' },
         { src: 'images/image6.jpg', cap: 'Awards' },
-        { src: 'images/image7.jpg', cap: 'Awards' },
-      
+        { src: 'images/image7.jpg', cap: 'Awards' }
       ],
-      para2: 'The grand finale on Day 3 featured a sold-out concert by Ananya Krishnan. Rangoli 2024 closed with fireworks and the promise of an even bigger edition next year.',
+      para2: 'The grand finale on Day 3 featured a sold-out concert by Ananya Krishnan. Rangoli 2024 closed with fireworks and the promise of an even bigger edition next year.'
     },
     sports: {
       title: 'Alvida 2026 – Farewell Event',
@@ -1263,196 +1204,173 @@ const galleryData = {
         { num: '3', lbl: 'Records Broken' },
         { num: '60+', lbl: 'Medals Awarded' }
       ],
-     featured: {
-  type: "video",
-  src: "images/image1.jpg",
-  caption: "Tech Fest opening ceremony highlights"
-},
+      featured: {
+        type: "image",
+        src: "images/image1.jpg",
+        caption: "Tech Fest opening ceremony highlights"
+      },
       quote: {
         text: 'When Kavya crossed the finish line and the whole crowd erupted, it was one of those goosebump moments that coaching is all about. She trained for this every single morning.',
         by: 'Coach Rajan Pillai, Athletics Department'
       },
       para1: 'The day began at 6:30 AM with warm-up sessions across the grounds. Track events ran in parallel with the cricket nets and volleyball courts. The 4x100m relay produced the closest finish in recent memory — the margin was less than a second between the top three teams.',
       photos: [
-       
         { src: 'images/image2.jpg', cap: 'Award Ceremony – Medal Distribution' },
         { src: 'images/image3.jpg', cap: 'Basketball Final – Packed stands' },
-        { src: 'images/image4.jpg', cap: 'Kabaddi – Action from the mat' },
-        ],
-      para2: 'The afternoon brought the team sports finals to a head. The football final ended 2-1 in a dramatic penalty shootout. The brand-new wheelchair racing event, introduced for the first time, received a standing ovation from the crowd.',
+        { src: 'images/image4.jpg', cap: 'Kabaddi – Action from the mat' }
+      ],
+      para2: 'The afternoon brought the team sports finals to a head. The football final ended 2-1 in a dramatic penalty shootout. The brand-new wheelchair racing event, introduced for the first time, received a standing ovation from the crowd.'
     }
   };
 
-/* OPEN GALLERY */
-function openGallery(key) {
+  /* OPEN GALLERY */
+  function openGallery(key) {
+    const d = galleryData[key];
+    if (!d) return alert("Gallery data missing: " + key);
 
-  const d = galleryData[key];
-  if (!d) return alert("Gallery data missing: " + key);
+    document.getElementById('galleryTitle').innerText = d.title;
+    document.getElementById('gallerySub').innerText = d.sub;
 
-  document.getElementById('galleryTitle').innerText = d.title;
-  document.getElementById('gallerySub').innerText = d.sub;
-
-  // ✅ FEATURED (FIXED ONCE ONLY)
-  let featuredHTML = "";
-
-  if (d.featured.type === "video") {
-    featuredHTML = `
-      <div class="gallery-featured">
-        <video controls autoplay muted loop style="width:100%; height:420px; object-fit:cover;">
-          <source src="${d.featured.src}" type="video/mp4">
-          Your browser does not support video tag.
-        </video>
-        <div class="caption">${d.featured.caption}</div>
-      </div>
-    `;
-  } else {
-    featuredHTML = `
-      <div class="gallery-featured">
-        <img src="${d.featured.src}" />
-        <div class="caption">${d.featured.caption}</div>
-      </div>
-    `;
-  }
-
-  // Stats
-  let statsHTML = `
-    <div class="stats-row">
-      ${d.stats.map(s => `
-        <div class="stat-box">
-          <div class="num">${s.num}</div>
-          <div class="lbl">${s.lbl}</div>
+    let featuredHTML = "";
+    if (d.featured.type === "video") {
+      featuredHTML = `
+        <div class="gallery-featured">
+          <video controls autoplay muted loop style="width:100%; height:420px; object-fit:cover;">
+            <source src="${d.featured.src}" type="video/mp4">
+            Your browser does not support video tag.
+          </video>
+          <div class="caption">${d.featured.caption}</div>
         </div>
-      `).join("")}
-    </div>
-  `;
-
-  // Photos
-  let photosHTML = `
-    <div class="gallery-section-title">Photo Highlights</div>
-    <div class="blog-grid">
-      ${d.photos.map(p => `
-        <div class="blog-photo">
-          <img src="${p.src}" />
-          <div class="photo-caption">${p.cap}</div>
-        </div>
-      `).join("")}
-    </div>
-  `;
-
-  // FINAL RENDER
-  document.getElementById('galleryBody').innerHTML = `
-    <div class="gallery-intro">
-      <div class="gi-tag">${d.tag}</div>
-      <h2>${d.title}</h2>
-      <p>${d.desc}</p>
-    </div>
-
-    ${featuredHTML}
-    ${statsHTML}
-
-    <p class="blog-paragraph">${d.para1}</p>
-
-    ${photosHTML}
-
-    <p class="blog-paragraph">${d.para2}</p>
-
-    <div class="quote-block">
-      <p>“${d.quote.text}”</p>
-      <cite>— ${d.quote.by}</cite>
-    </div>
-  `;
-
-  document.getElementById('galleryOverlay').style.display = 'flex';
-  document.body.style.overflow = 'hidden';
-}/* CLOSE GALLERY */
-function closeGallery() {
-  document.getElementById('galleryOverlay').style.display = 'none';
-  document.body.style.overflow = '';
-}
-
-/* REGISTER */
-function openRegister(name, date) {
-  document.getElementById('regBackdrop').classList.add('active');
-  document.getElementById('regEventTitle').innerText = name;
-  document.getElementById('regEventDate').innerText = date;
-}
-
-function closeRegister() {
-  document.getElementById('regBackdrop').classList.remove('active');
-}
-
-/* SIMPLE SUBMIT FIX */
-async function submitRegister() {
-  const name = document.getElementById("reg_name").value.trim();
-  const roll = document.getElementById("reg_id").value.trim();
-  const email = document.getElementById("reg_email").value.trim();
-  const phone = document.getElementById("reg_phone").value.trim();
-  const dept = document.getElementById("reg_dept").value;
-  const year = document.getElementById("reg_year").value;
-  const participation = document.getElementById("reg_participation").value;
-  const event = document.getElementById("regEventTitle").innerText;
-
-  // EMAIL CHECK
-  const emailPattern = /^[a-zA-Z0-9._%+-]+@(rguktrkv\.ac\.in|gmail\.com)$/;
-
-  // ROLL CHECK (R/N/O/S + 6 digits)
-  const rollPattern = /^[RNOS][0-9]{6}$/;
-
-  // PHONE CHECK (10 digits)
-  const phonePattern = /^[0-9]{10}$/;
-
-  if (!name || !roll || !email || !dept || !year || !participation) {
-    alert("Please fill all required fields");
-    return;
-  }
-
-  if (!emailPattern.test(email)) {
-    alert("Email must be @rguktrkv.ac.in or @gmail.com");
-    return;
-  }
-
-  if (!rollPattern.test(roll)) {
-    alert("Roll must start with R/N/O/S followed by 6 digits (e.g. R221088)");
-    return;
-  }
-
-  if (!phonePattern.test(phone)) {
-    alert("Phone must be exactly 10 digits");
-    return;
-  }
-
-  const data = {
-    name,
-    roll,
-    email,
-    phone,
-    dept,
-    year,
-    participation,
-    event
-  };
-
-  try {
-    const res = await fetch("http://localhost:5000/register", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data)
-    });
-
-    const result = await res.json();
-
-    if (res.ok) {
-      document.getElementById("regConfirmId").innerText = result.regId;
-      document.getElementById("regFormArea").style.display = "none";
-      document.getElementById("regSuccess").classList.add("visible");
+      `;
     } else {
-      alert(result.message || "Registration failed");
+      featuredHTML = `
+        <div class="gallery-featured">
+          <img src="${d.featured.src}" />
+          <div class="caption">${d.featured.caption}</div>
+        </div>
+      `;
     }
-  } catch (err) {
-    console.error(err);
-    alert("Server not reachable");
+
+    let statsHTML = `
+      <div class="stats-row">
+        ${d.stats.map(s => `
+          <div class="stat-box">
+            <div class="num">${s.num}</div>
+            <div class="lbl">${s.lbl}</div>
+          </div>
+        `).join("")}
+      </div>
+    `;
+
+    let photosHTML = `
+      <div class="gallery-section-title">Photo Highlights</div>
+      <div class="blog-grid">
+        ${d.photos.map(p => `
+          <div class="blog-photo">
+            <img src="${p.src}" />
+            <div class="photo-caption">${p.cap}</div>
+          </div>
+        `).join("")}
+      </div>
+    `;
+
+    document.getElementById('galleryBody').innerHTML = `
+      <div class="gallery-intro">
+        <div class="gi-tag">${d.tag}</div>
+        <h2>${d.title}</h2>
+        <p>${d.desc}</p>
+      </div>
+      ${featuredHTML}
+      ${statsHTML}
+      <p class="blog-paragraph">${d.para1}</p>
+      ${photosHTML}
+      <p class="blog-paragraph">${d.para2}</p>
+      <div class="quote-block">
+        <p>"${d.quote.text}"</p>
+        <cite>— ${d.quote.by}</cite>
+      </div>
+    `;
+
+    document.getElementById('galleryOverlay').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
   }
-}</script>
+
+  /* CLOSE GALLERY */
+  function closeGallery() {
+    document.getElementById('galleryOverlay').style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
+  /* REGISTER */
+  function openRegister(name, date) {
+    document.getElementById('regBackdrop').classList.add('active');
+    document.getElementById('regEventTitle').innerText = name;
+    document.getElementById('regEventDate').innerText = date;
+  }
+
+  function closeRegister() {
+    document.getElementById('regBackdrop').classList.remove('active');
+    // Reset form state for next use
+    document.getElementById('regFormArea').style.display = '';
+    document.getElementById('regSuccess').classList.remove('visible');
+  }
+
+  /* SUBMIT REGISTRATION — posts to backend at /register */
+  async function submitRegister() {
+    const name          = document.getElementById("reg_name").value.trim();
+    const roll          = document.getElementById("reg_id").value.trim();
+    const email         = document.getElementById("reg_email").value.trim();
+    const phone         = document.getElementById("reg_phone").value.trim();
+    const dept          = document.getElementById("reg_dept").value;
+    const year          = document.getElementById("reg_year").value;
+    const participation = document.getElementById("reg_participation").value;
+    const event         = document.getElementById("regEventTitle").innerText;
+
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@(rguktrkv\.ac\.in|gmail\.com)$/;
+    const rollPattern  = /^[RNOS][0-9]{6}$/;
+    const phonePattern = /^[0-9]{10}$/;
+
+    if (!name || !roll || !email || !dept || !year || !participation) {
+      alert("Please fill all required fields");
+      return;
+    }
+    if (!emailPattern.test(email)) {
+      alert("Email must be @rguktrkv.ac.in or @gmail.com");
+      return;
+    }
+    if (!rollPattern.test(roll)) {
+      alert("Roll must start with R/N/O/S followed by 6 digits (e.g. R221088)");
+      return;
+    }
+    if (!phonePattern.test(phone)) {
+      alert("Phone must be exactly 10 digits");
+      return;
+    }
+
+    const data = { name, roll, email, phone, dept, year, participation, event };
+
+    try {
+      const res = await fetch("/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
+
+      const result = await res.json();
+
+      if (res.ok) {
+        document.getElementById("regConfirmId").innerText = result.regId;
+        document.getElementById("regFormArea").style.display = "none";
+        document.getElementById("regSuccess").classList.add("visible");
+      } else {
+        alert(result.message || "Registration failed");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Server not reachable");
+    }
+  }
+</script>
 
 </body>
 </html>
