@@ -19,8 +19,11 @@ const db = mysql.createConnection({
 });
 
 db.connect(err => {
-  if (err) console.error("DB Connection Failed:", err);
-  else console.log("MySQL Connected");
+  if (err) {
+    console.error("DB Connection Failed:", err);
+  } else {
+    console.log("MySQL Connected");
+  }
 });
 
 // REGISTER API
@@ -51,7 +54,12 @@ app.get("/registrations", (req, res) => {
     res.json(results);
   });
 });
-
+app.get("/", (req, res) => {
+  res.send("Backend running 🚀");
+});
+app.get("/api/events", (req, res) => {
+  res.json({ message: "Events API working" });
+});
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, "0.0.0.0", () => {
