@@ -1158,219 +1158,136 @@ It was an evening filled with emotions, laughter, memories, and gratitude, celeb
 
 <!-- ═══════════════════ SCRIPTS ═══════════════════════════════════ -->
 <script>
-  /* ── Smooth scroll helper ── */
-  function scrollToSection(id) {
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+/* ── Smooth scroll helper ── */
+function scrollToSection(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth' });
+}
+
+/* ── Gallery Data ── */
+const galleryData = {
+  cultfest: {
+    title: "Arohana 2026 – Cultural Extravaganza",
+    sub: "January 3–4, 2026",
+    desc: "A vibrant celebration of culture, dance, music and tradition.",
+    images: [
+      "images/WhatsApp Image 2026-04-11 at 14.22.35.jpeg",
+      "images/WhatsApp Image 2026-04-11 at 14.22.36(1).jpeg",
+      "images/WhatsApp Image 2026-04-11 at 14.22.37.jpeg"
+    ]
+  },
+  sports: {
+    title: "Alvida 2026 – Farewell & Sports",
+    sub: "April 1–2, 2026",
+    desc: "Emotional farewell combined with energetic sports events.",
+    images: [
+      "images/WhatsApp Image 2026-04-11 at 14.23.05.jpeg",
+      "images/WhatsApp Image 2026-04-11 at 14.23.04.jpeg",
+      "images/WhatsApp Image 2026-04-11 at 14.23.04(1).jpeg"
+    ]
+  }
+};
+
+/* ── Open Gallery ── */
+function openGallery(type) {
+  const data = galleryData[type];
+  const overlay = document.getElementById("galleryOverlay");
+
+  document.getElementById("galleryTitle").innerText = data.title;
+  document.getElementById("gallerySub").innerText = data.sub;
+
+  let html = `
+    <div class="gallery-intro">
+      <div class="gi-tag">Event Highlights</div>
+      <h2>${data.title}</h2>
+      <p>${data.desc}</p>
+    </div>
+    <div class="blog-grid">
+  `;
+
+  data.images.forEach(img => {
+    html += `
+      <div class="blog-photo">
+        <img src="${img}" />
+      </div>
+    `;
+  });
+
+  html += `</div>`;
+
+  document.getElementById("galleryBody").innerHTML = html;
+  overlay.classList.add("active");
+}
+
+/* ── Close Gallery ── */
+function closeGallery() {
+  document.getElementById("galleryOverlay").classList.remove("active");
+}
+
+/* ── Open Register ── */
+function openRegister(name, date) {
+  document.getElementById("regBackdrop").classList.add("active");
+  document.getElementById("regEventTitle").innerText = name;
+  document.getElementById("regEventDate").innerText = date;
+
+  document.getElementById("regFormArea").style.display = "block";
+  document.getElementById("regSuccess").classList.remove("visible");
+}
+
+/* ── Close Register ── */
+function closeRegister() {
+  document.getElementById("regBackdrop").classList.remove("active");
+}
+
+/* ── Submit Register ── */
+async function submitRegister() {
+  const name = document.getElementById("reg_name").value;
+  const roll = document.getElementById("reg_id").value;
+  const email = document.getElementById("reg_email").value;
+  const phone = document.getElementById("reg_phone").value;
+  const dept = document.getElementById("reg_dept").value;
+  const year = document.getElementById("reg_year").value;
+  const participation = document.getElementById("reg_participation").value;
+
+  const event = document.getElementById("regEventTitle").innerText;
+
+  if (!name || !roll || !email || !dept || !year || !participation) {
+    alert("Please fill all required fields!");
+    return;
   }
 
-  const galleryData = {
-    cultfest: {
-      title: 'Arohana 2026 – Cultural Extravaganza',
-      sub: 'January 2–3, 2026 &nbsp;|&nbsp; Open Grounds',
-      tag: 'Culture · Music · Dance',
-      desc: 'Three days of unrestrained celebration — Rangoli 2026 painted our campus in colour, rhythm, and joy. From classical recitals at dawn to the indie concert that went deep into the night, every corner of RGUKT was alive.',
-      stats: [
-        { num: '2,500+', lbl: 'Attendees' },
-        { num: '40+', lbl: 'Performances' },
-        { num: '14', lbl: 'Colleges' },
-        { num: '20', lbl: 'Food Stalls' }
-      ],
-      featured: {
-        type: "video",
-        src: "videos/aarohana.mp4",
-        caption: "Tech Fest opening ceremony highlights"
+  try {
+    const response = await fetch("http://localhost:5000/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
       },
-      quote: {
-        text: 'The energy when 2,000 people sang along to the closing number was unlike anything I have experienced in years of performing. RGUKT knows how to celebrate.',
-        by: 'Ananya Krishnan, Guest Performer'
-      },
-      para1: 'Day one opened with a spectacular Bharatanatyam performance by the Dance Society, followed by a procession of folk dancers from across Andhra Pradesh. The student-built art exhibit drew a constant crowd, with visitors photographing every canvas. The evening ended with a drum circle open to all students.',
-      photos: [
-        { src: 'images/image5.jpg', cap: 'Awards' },
-        { src: 'images/image6.jpg', cap: 'Awards' },
-        { src: 'images/image7.jpg', cap: 'Awards' }
-      ],
-      para2: 'The grand finale on Day 3 featured a sold-out concert by Ananya Krishnan. Rangoli 2024 closed with fireworks and the promise of an even bigger edition next year.'
-    },
-    sports: {
-      title: 'Alvida 2026 – Farewell Event',
-      sub: 'April 1-2, 2026 &nbsp;|&nbsp; College Sports Ground',
-      tag: 'Sports · Athletics',
-      desc: 'Champions League 2024 was a day of grit, sweat, and smiles. With 18 disciplines, 800+ participants, and records broken, this was the most comprehensive Sports Day in RGUKT history.',
-      stats: [
-        { num: '800+', lbl: 'Participants' },
-        { num: '18', lbl: 'Disciplines' },
-        { num: '3', lbl: 'Records Broken' },
-        { num: '60+', lbl: 'Medals Awarded' }
-      ],
-      featured: {
-        type: "image",
-        src: "images/image1.jpg",
-        caption: "Tech Fest opening ceremony highlights"
-      },
-      quote: {
-        text: 'When Kavya crossed the finish line and the whole crowd erupted, it was one of those goosebump moments that coaching is all about. She trained for this every single morning.',
-        by: 'Coach Rajan Pillai, Athletics Department'
-      },
-      para1: 'The day began at 6:30 AM with warm-up sessions across the grounds. Track events ran in parallel with the cricket nets and volleyball courts. The 4x100m relay produced the closest finish in recent memory — the margin was less than a second between the top three teams.',
-      photos: [
-        { src: 'images/image2.jpg', cap: 'Award Ceremony – Medal Distribution' },
-        { src: 'images/image3.jpg', cap: 'Basketball Final – Packed stands' },
-        { src: 'images/image4.jpg', cap: 'Kabaddi – Action from the mat' }
-      ],
-      para2: 'The afternoon brought the team sports finals to a head. The football final ended 2-1 in a dramatic penalty shootout. The brand-new wheelchair racing event, introduced for the first time, received a standing ovation from the crowd.'
-    }
-  };
+      body: JSON.stringify({
+        name,
+        roll,
+        email,
+        phone,
+        dept,
+        year,
+        event,
+        participation
+      })
+    });
 
-  /* OPEN GALLERY */
-  function openGallery(key) {
-    const d = galleryData[key];
-    if (!d) return alert("Gallery data missing: " + key);
+    const result = await response.json();
+    console.log(result);
 
-    document.getElementById('galleryTitle').innerText = d.title;
-    document.getElementById('gallerySub').innerText = d.sub;
-
-    let featuredHTML = "";
-    if (d.featured.type === "video") {
-      featuredHTML = `
-        <div class="gallery-featured">
-          <video controls autoplay muted loop style="width:100%; height:420px; object-fit:cover;">
-            <source src="${d.featured.src}" type="video/mp4">
-            Your browser does not support video tag.
-          </video>
-          <div class="caption">${d.featured.caption}</div>
-        </div>
-      `;
+    if (response.ok) {
+      document.getElementById("regFormArea").style.display = "none";
+      document.getElementById("regSuccess").classList.add("visible");
+      document.getElementById("regConfirmId").innerText = result.regId;
     } else {
-      featuredHTML = `
-        <div class="gallery-featured">
-          <img src="${d.featured.src}" />
-          <div class="caption">${d.featured.caption}</div>
-        </div>
-      `;
+      alert(result.message || "Registration failed");
     }
 
-    let statsHTML = `
-      <div class="stats-row">
-        ${d.stats.map(s => `
-          <div class="stat-box">
-            <div class="num">${s.num}</div>
-            <div class="lbl">${s.lbl}</div>
-          </div>
-        `).join("")}
-      </div>
-    `;
-
-    let photosHTML = `
-      <div class="gallery-section-title">Photo Highlights</div>
-      <div class="blog-grid">
-        ${d.photos.map(p => `
-          <div class="blog-photo">
-            <img src="${p.src}" />
-            <div class="photo-caption">${p.cap}</div>
-          </div>
-        `).join("")}
-      </div>
-    `;
-
-    document.getElementById('galleryBody').innerHTML = `
-      <div class="gallery-intro">
-        <div class="gi-tag">${d.tag}</div>
-        <h2>${d.title}</h2>
-        <p>${d.desc}</p>
-      </div>
-      ${featuredHTML}
-      ${statsHTML}
-      <p class="blog-paragraph">${d.para1}</p>
-      ${photosHTML}
-      <p class="blog-paragraph">${d.para2}</p>
-      <div class="quote-block">
-        <p>"${d.quote.text}"</p>
-        <cite>— ${d.quote.by}</cite>
-      </div>
-    `;
-
-    document.getElementById('galleryOverlay').style.display = 'flex';
-    document.body.style.overflow = 'hidden';
+  } catch (err) {
+    console.error(err);
+    alert("Server error");
   }
-
-  /* CLOSE GALLERY */
-  function closeGallery() {
-    document.getElementById('galleryOverlay').style.display = 'none';
-    document.body.style.overflow = '';
-  }
-
-  /* REGISTER */
-  function openRegister(name, date) {
-    document.getElementById('regBackdrop').classList.add('active');
-    document.getElementById('regEventTitle').innerText = name;
-    document.getElementById('regEventDate').innerText = date;
-  }
-
-  function closeRegister() {
-    document.getElementById('regBackdrop').classList.remove('active');
-    // Reset form state for next use
-    document.getElementById('regFormArea').style.display = '';
-    document.getElementById('regSuccess').classList.remove('visible');
-  }
-
-  /* SUBMIT REGISTRATION — posts to backend at /register */
-  async function submitRegister() {
-    const name          = document.getElementById("reg_name").value.trim();
-    const roll          = document.getElementById("reg_id").value.trim();
-    const email         = document.getElementById("reg_email").value.trim();
-    const phone         = document.getElementById("reg_phone").value.trim();
-    const dept          = document.getElementById("reg_dept").value;
-    const year          = document.getElementById("reg_year").value;
-    const participation = document.getElementById("reg_participation").value;
-    const event         = document.getElementById("regEventTitle").innerText;
-
-    const emailPattern = /^[a-zA-Z0-9._%+-]+@(rguktrkv\.ac\.in|gmail\.com)$/;
-    const rollPattern  = /^[RNOS][0-9]{6}$/;
-    const phonePattern = /^[0-9]{10}$/;
-
-    if (!name || !roll || !email || !dept || !year || !participation) {
-      alert("Please fill all required fields");
-      return;
-    }
-    if (!emailPattern.test(email)) {
-      alert("Email must be @rguktrkv.ac.in or @gmail.com");
-      return;
-    }
-    if (!rollPattern.test(roll)) {
-      alert("Roll must start with R/N/O/S followed by 6 digits (e.g. R221088)");
-      return;
-    }
-    if (!phonePattern.test(phone)) {
-      alert("Phone must be exactly 10 digits");
-      return;
-    }
-
-    const data = { name, roll, email, phone, dept, year, participation, event };
-
-    try {
-      const res = await fetch("/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
-      });
-
-      const result = await res.json();
-
-      if (res.ok) {
-        document.getElementById("regConfirmId").innerText = result.regId;
-        document.getElementById("regFormArea").style.display = "none";
-        document.getElementById("regSuccess").classList.add("visible");
-      } else {
-        alert(result.message || "Registration failed");
-      }
-    } catch (err) {
-      console.error(err);
-      alert("Server not reachable");
-    }
-  }
-</script>
-
-</body>
+}</script></body>
 </html>
